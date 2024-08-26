@@ -1,0 +1,7 @@
+{
+    "prosjektdata": {
+        "utviklere": ["fornavn","etternavn"],
+        "kodespråk": ["HTML", "CSS", "Javascript"],
+        "repo_link": "#"
+    }
+}
