@@ -1,7 +1,16 @@
 {
-    "prosjektdata": {
-        "utviklere": ["fornavn","etternavn"],
-        "kodespråk": ["HTML", "CSS", "Javascript"],
-        "repo_link": "#"
+  "prosjekter": [
+    {
+      "prosjekt_navn": "test prosjekt 1",
+      "utviklere": ["Ole Nordman", "Tuva Marie Andersen"],
+      "kodespråk": ["HTML", "CSS", "Javascript"],
+      "repo_link": "#"
+    },
+    {
+      "prosjekt_navn": "test prosjekt 2",
+      "utviklere": ["Tuva Marie Andersen"],
+      "kodespråk": ["HTML", "CSS", "Javascript"],
+      "repo_link": "#"
     }
+  ]
 }

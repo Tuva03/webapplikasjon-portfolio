@@ -1,0 +1,9 @@
+sequenceDiagram
+Nettleser->>Server: Laster inn prosjekter
+    Note right of Nettleser: Funksjon aktivert
+    rect rgb(191, 223, 255)
+    loop HenterProsjekter
+        Server->>Server: Finner registrerte prosjekter
+    end
+    end
+    Server-->>Nettleser: Sender alle registrerte prosjekter

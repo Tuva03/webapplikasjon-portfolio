@@ -1,0 +1,58 @@
+:root {
+  --headerColor: #34428b;
+  --footerColor: #34428b;
+  --articleColor: #d7e1f5;
+}
+
+body {
+  header {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem;
+    gap: 1rem;
+    align-items: center;
+    background-color: var(--headerColor);
+    h1 {
+      color: white;
+      padding-left: 3rem;
+    }
+    a {
+      color: white;
+      font-size: 25px;
+    }
+    nav {
+      display: flex;
+      flex-wrap: wrap;
+      margin-left: auto;
+      gap: 2rem;
+      padding: 0rem 2.5rem 0rem 2.5rem;
+    }
+  }
+
+  background-color: rgb(227, 235, 238);
+
+  section#prosjekter {
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem;
+    gap: 1rem;
+  }
+
+  article {
+    background-color: var(--articleColor);
+    display: flex;
+    flex-wrap: wrap;
+    padding: 1rem;
+    border-radius: 5px;
+  }
+
+  footer {
+    background-color: var(--headerColor);
+    p {
+      color: white;
+    }
+    a {
+      color: white;
+    }
+  }
+}
