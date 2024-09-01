@@ -1,9 +1,5 @@
 sequenceDiagram
-    Nettleser->>Server: Opprett nytt prosjekt
-    Note right of Nettleser: Funksjon aktivert
-    rect rgb(255, 127, 127)
-    break Når opprettelse av nytt prosjekt feiler
-    Nettleser-->Server: vis feilmelding
-    end
-    end
-    Server-->>Nettleser: Nytt prosjekt opprettet
+    Nettleser->>Server: HTTP Get prosjekter
+    Server->>Database: Henter data
+    Database-->>Server:Returnerer data
+    Server-->>Nettleser: HTTP respons (HTML, CSS, JavaScript)
