@@ -95,9 +95,11 @@ body {
     justify-content: space-between;
     p {
       color: white;
+      font-size: 18px;
     }
     a {
       color: white;
+      font-size: 18px;
     }
   }
 }
