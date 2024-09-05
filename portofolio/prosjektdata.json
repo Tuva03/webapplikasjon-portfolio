@@ -1,16 +1,14 @@
 {
   "prosjekter": [
     {
-      "prosjekt_navn": "test prosjekt 1",
-      "utviklere": ["Ole Nordman", "Tuva Marie Andersen"],
-      "kodespråk": ["HTML", "CSS", "Javascript"],
-      "repo_link": "#"
+      "prosjekt_navn": "Prosjekt eksempel 1",
+      "beskrivelse": "Her kommer det kul beskrivelse",
+      "repo_link": "Her kommer linken til repoet"
     },
     {
-      "prosjekt_navn": "test prosjekt 2",
-      "utviklere": ["Tuva Marie Andersen"],
-      "kodespråk": ["HTML", "CSS", "Javascript"],
-      "repo_link": "#"
+      "prosjekt_navn": "Prosjekt eksempel 2",
+      "beskrivelse": "Her kommer det kul beskrivelse",
+      "repo_link": "Her kommer linken til repoet"
     }
   ]
 }
