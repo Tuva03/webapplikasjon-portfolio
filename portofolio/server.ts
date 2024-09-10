@@ -22,7 +22,10 @@ const projects: Project[] = [
 
 // Henter alle prosjekter fra serveren
 app.get("/json", async (c) => {
-  const data = await fs.readFile("./prosjektdata.json", "utf8");
+  const data = await fs.readFile(
+    "./react/src/components/prosjektdata.json",
+    "utf8"
+  );
   const dataAsJson = JSON.parse(data);
   return c.json(dataAsJson);
 });

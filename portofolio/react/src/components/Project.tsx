@@ -1,43 +1,41 @@
+import type { PropsWithChildren } from "react";
+
 type ProjectProps = {
-  title: string;
-  description: string;
-  repo_link: number;
+  prosjekt_navn: string;
+  beskrivelse: string;
+  repo_link: string;
 };
 
-function Project(props: ProjectProps) {
+function Project(props: Readonly<PropsWithChildren<ProjectProps>>) {
+  const { children, prosjekt_navn, beskrivelse, repo_link } = props;
   return (
-    <article>
-      <h3>{props.title}</h3>
-      <p>Beskrivelse:{props.description}</p>
-      <a>{props.repo_link}</a>
-    </article>
+    <>
+      {children}
+      <article>
+        <h3>{prosjekt_navn}</h3>
+        <p>Beskrivelse: {beskrivelse}</p>
+        <a>Link: {repo_link}</a>
+      </article>
+    </>
   );
 }
 
-export default function Projects(props: ProjectProps) {
+type ProjectsProps = {
+  projects: ProjectProps[];
+};
+
+export default function Projects(props: Readonly<ProjectsProps>) {
   // Send props videre og legg til riktig props under på Project
+  const { projects = [] } = props;
   return (
-    <>
-      <Project
-        title={props.title}
-        description={props.description}
-        repo_link={props.repo_link}
-      />
-      <Project
-        title={props.title}
-        description={props.description}
-        repo_link={props.repo_link}
-      />
-      <Project
-        title={props.title}
-        description={props.description}
-        repo_link={props.repo_link}
-      />
-      <Project
-        title={props.title}
-        description={props.description}
-        repo_link={props.repo_link}
-      />
-    </>
+    <section>
+      {projects.map((project) => (
+        <Project
+          prosjekt_navn={project.prosjekt_navn}
+          beskrivelse={project.beskrivelse}
+          repo_link={project.repo_link}
+        />
+      ))}
+    </section>
   );
 }

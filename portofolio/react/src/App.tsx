@@ -1,28 +1,35 @@
 import Projects from "./components/Project";
+import * as prosjekter from "./components/prosjektdata.json";
 
 function App() {
-  const student = "Halgeir Geirson";
-  const degree = "Bachelor IT";
-  const points = 180;
-  const experienceOne = "Figma UI for customer X";
-  const experienceTwo = "Website for customer Y";
-  const email = "student@hiof.no";
+  const student = {
+    name: "Halgeir Geirson",
+    degree: "Bachelor i IT",
+    points: 180,
+    email: "student@hiof.no",
+    experiences: [
+      { name: "Figma UI for customer X" },
+      { name: "Website for customer Y" },
+    ],
+  };
+  const prosjektlise = prosjekter.prosjekter;
 
   return (
-    <div>
-      <Header student={student} degree={degree} points={points} />
-      <Experiences
-        experienceOne={experienceOne}
-        experienceTwo={experienceTwo}
+    <main>
+      <Header
+        name={student.name}
+        degree={student.degree}
+        points={student.points}
       />
-      <Contact email={email} />
-      <Projects />
-    </div>
+      <Experiences experiences={student.experiences} />
+      <Contact email={student.email} />
+      <Projects projects={prosjektlise} />
+    </main>
   );
 }
 
 type HeaderProps = {
-  student: string;
+  name: string;
   degree: string;
   points: number;
 };
@@ -31,43 +38,33 @@ function Header(props: HeaderProps) {
   return (
     <header>
       <p>
-        Studenten {props.student} studerer {props.degree} og har for øyeblikket{" "}
+        Studenten {props.name} studerer {props.degree} og har for øyeblikket{" "}
         {props.points} studiepoeng!
       </p>
     </header>
   );
 }
-/*
-type ExperiencesProps = {
-  experienceOne: string;
-  experienceTwo: string;
+
+type ExperienceProps = {
+  experiences: {
+    name: string;
+  }[];
 };
 
-
-function Experiences(props: ExperiencesProps) {
-  return (
-    <section>
-      <p>
-        Erfaringer: {props.experienceOne} og {props.experienceTwo}
-      </p>
-    </section>
-  );
-}
-*/
-
-type ExperienceProp = {
-  description: string;
-};
-
-function Experience(props: ExperienceProp) {
-  return <p>Beskrivelse: {props.description}</p>;
+function Experience({ name }: { name: string }) {
+  return <p>{name}</p>;
 }
 
-function Experiences({ experienceOne, experienceTwo }) {
+function Experiences(props: Readonly<ExperienceProps>) {
+  const { experiences = [] } = props;
   return (
     <div>
-      <Experience description={experienceOne} />
-      <Experience description={experienceTwo} />
+      <p>Erfaringer:</p>
+      {experiences.map((experience) => (
+        <p key={experience.name}>
+          <Experience name={experience.name}></Experience>
+        </p>
+      ))}
     </div>
   );
 }
@@ -76,10 +73,11 @@ type ContactProps = {
   email: string;
 };
 
-function Contact(props: ContactProps) {
+function Contact(props: Readonly<ContactProps>) {
+  const { email } = props;
   return (
     <section>
-      <p>Kontaktinformasjon: {props.email}</p>
+      <p>Kontaktinformasjon: {email}</p>
     </section>
   );
 }
