@@ -1,6 +1,6 @@
 import type { PropsWithChildren } from "react";
 
-type ProjectProps = {
+export type ProjectProps = {
   prosjekt_navn: string;
   beskrivelse: string;
   repo_link: string;
@@ -29,13 +29,17 @@ export default function Projects(props: Readonly<ProjectsProps>) {
   const { projects = [] } = props;
   return (
     <section>
-      {projects.map((project) => (
-        <Project
-          prosjekt_navn={project.prosjekt_navn}
-          beskrivelse={project.beskrivelse}
-          repo_link={project.repo_link}
-        />
-      ))}
+      {projects.length === 0 ? (
+        <p>Du har ingen prosjekter</p>
+      ) : (
+        projects.map((project) => (
+          <Project
+            prosjekt_navn={project.prosjekt_navn}
+            beskrivelse={project.beskrivelse}
+            repo_link={project.repo_link}
+          />
+        ))
+      )}
     </section>
   );
 }

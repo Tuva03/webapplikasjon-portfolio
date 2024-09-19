@@ -13,11 +13,15 @@ export default function Experiences(props: Readonly<ExperienceProps>) {
   return (
     <div>
       <p>Erfaringer:</p>
-      {experiences.map((experience) => (
-        <p key={experience.name}>
-          <Experience name={experience.name}></Experience>
-        </p>
-      ))}
+      {experiences.length === 0 ? (
+        <p>Du har ingen erfaringer</p>
+      ) : (
+        experiences.map((experience) => (
+          <p key={experience.name}>
+            <Experience name={experience.name}></Experience>
+          </p>
+        ))
+      )}
     </div>
   );
 }
