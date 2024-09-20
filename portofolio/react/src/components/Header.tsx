@@ -1,8 +1,4 @@
-type HeaderProps = {
-  name: string;
-  degree: string;
-  points: number;
-};
+import { HeaderProps } from "./Types";
 
 export default function Header(props: HeaderProps) {
   return (

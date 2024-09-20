@@ -12,8 +12,9 @@ app.use("/*", cors());
 app.use("/portofolio/*", serveStatic({ root: "./" }));
 
 // Sender data til serveren og lagrer prosjektet i en tom liste.
-const projects: Project[] = [
+let projects: Project[] = [
   {
+    id: "1",
     prosjekt_navn: "Prosjekt eksempel 1",
     beskrivelse: "Her kommer det kul beskrivelse",
     repo_link: "Her kommer linken til repoet",
@@ -45,6 +46,12 @@ app.post("/add", async (c) => {
 
 app.get("/", (c) => {
   return c.json<Project[]>(projects);
+});
+
+app.delete("/delete", async (c) => {
+  const id = c.req.param("id");
+  projects = projects.filter((project) => project.id !== id);
+  return c.json<Project[]>(projects, { status: 201 });
 });
 
 const port = 3999;

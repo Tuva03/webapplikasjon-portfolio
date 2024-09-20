@@ -1,10 +1,7 @@
 import type { PropsWithChildren } from "react";
-
-export type ProjectProps = {
-  prosjekt_navn: string;
-  beskrivelse: string;
-  repo_link: string;
-};
+import CreateProject from "./CreateProject";
+import { useState } from "react";
+import { ProjectProps } from "./Types";
 
 function Project(props: Readonly<PropsWithChildren<ProjectProps>>) {
   const { children, prosjekt_navn, beskrivelse, repo_link } = props;
@@ -25,21 +22,54 @@ type ProjectsProps = {
 };
 
 export default function Projects(props: Readonly<ProjectsProps>) {
-  // Send props videre og legg til riktig props under på Project
-  const { projects = [] } = props;
+  const [projects, setProjects] = useState<ProjectProps[]>(
+    props.projects ?? []
+  );
+
+  const onAddProject = (project: {
+    title: string;
+    description: string;
+    repo_link: string;
+  }) => {
+    setProjects((prev) => [
+      ...prev,
+      {
+        id: crypto.randomUUID(),
+        prosjekt_navn: project.title, // Mapping title to prosjekt_navn
+        beskrivelse: project.description, // Mapping description to beskrivelse
+        repo_link: project.repo_link, // Keeping repo_link as is
+      },
+    ]);
+  };
+
+  const removeProject = (id: string) => {
+    setProjects((prev) => prev.filter((project) => project.id !== id));
+  };
+
   return (
-    <section>
-      {projects.length === 0 ? (
-        <p>Du har ingen prosjekter</p>
-      ) : (
-        projects.map((project) => (
-          <Project
-            prosjekt_navn={project.prosjekt_navn}
-            beskrivelse={project.beskrivelse}
-            repo_link={project.repo_link}
-          />
-        ))
-      )}
-    </section>
+    <div>
+      <section>
+        {projects.length === 0 ? (
+          <p>Du har ingen prosjekter</p>
+        ) : (
+          projects.map((project) => (
+            <>
+              <Project
+                id={project.id}
+                prosjekt_navn={project.prosjekt_navn}
+                beskrivelse={project.beskrivelse}
+                repo_link={project.repo_link}
+              />
+              <button onClick={() => removeProject(project.id)} type="button">
+                Fjern prosjekt
+              </button>
+            </>
+          ))
+        )}
+      </section>
+      <section>
+        <CreateProject onAddProject={onAddProject} />
+      </section>
+    </div>
   );
 }

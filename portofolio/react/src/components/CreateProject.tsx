@@ -1,6 +1,9 @@
 import { useState, type FormEvent } from "react";
+import { AddProjectFormProps } from "./Types";
 
-export default function CreateProject() {
+export default function CreateProject({ onAddProject }: AddProjectFormProps) {
+  //const { onAddProject } = props;
+
   const [titleValid, setTitleValid] = useState(false);
   const [titleIsDirty, setTitleIsDirty] = useState(false);
   const [titleIsTouched, setTitleIsTouched] = useState(false);
@@ -60,19 +63,16 @@ export default function CreateProject() {
     }
   };
 
-  const addProjectFormProps = {
-    onAddProject: ({ title }: { title: string }, { description }: { description: string }, { repolink }: { repolink: string }) => void;
-  };
-
-
-  const addProject = (event: FormEvent<HTMLFormElement>) => {
-    event.preventDefault();
+  const handleSubmit = (e: React.FormEvent) => {
+    e.preventDefault();
 
     if (!title || !description || !repolink) return;
 
-    const form = event.target as HTMLFormElement | null;
+    const form = e.target as HTMLFormElement | null;
 
     if (!form) return;
+
+    onAddProject({ title, description, repo_link: repolink });
 
     console.log(title, description, repolink);
 
@@ -98,7 +98,7 @@ export default function CreateProject() {
   return (
     <section>
       <pre>{JSON.stringify({ title, description, repolink })}</pre>
-      <form onSubmit={addProject}>
+      <form onSubmit={handleSubmit}>
         <label htmlFor="title">
           Prosjekt tittel:
           <input

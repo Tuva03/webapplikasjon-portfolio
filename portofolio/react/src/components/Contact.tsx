@@ -1,8 +1,5 @@
 import { type FormEvent, useState } from "react";
-
-type ContactProps = {
-  email: string;
-};
+import type { ContactProps } from "./Types";
 
 export default function Contact(props: Readonly<ContactProps>) {
   const { email } = props;

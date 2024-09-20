@@ -1,8 +1,4 @@
-type ExperienceProps = {
-  experiences: {
-    name: string;
-  }[];
-};
+import { ExperienceProps } from "./Types";
 
 function Experience({ name }: { name: string }) {
   return <p>{name}</p>;
