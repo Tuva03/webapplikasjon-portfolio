@@ -2,6 +2,7 @@ import type { PropsWithChildren } from "react";
 import CreateProject from "./CreateProject";
 import { useState } from "react";
 import { ProjectProps } from "./Types";
+import Total from "./Total";
 
 function Project(props: Readonly<PropsWithChildren<ProjectProps>>) {
   const { children, prosjekt_navn, beskrivelse, kategori, repo_link } = props;
@@ -39,7 +40,7 @@ export default function Projects(props: Readonly<ProjectsProps>) {
         id: crypto.randomUUID(),
         prosjekt_navn: project.title, // Mapping title to prosjekt_navn
         beskrivelse: project.description, // Mapping description to beskrivelse
-        kategori: project.category, // Mapping 
+        kategori: project.category, // Mapping
         repo_link: project.repo_link, // Keeping repo_link as is
       },
     ]);
@@ -73,6 +74,9 @@ export default function Projects(props: Readonly<ProjectsProps>) {
       </section>
       <section>
         <CreateProject onAddProject={onAddProject} />
+      </section>
+      <section>
+        <Total total={projects.length} />
       </section>
     </div>
   );

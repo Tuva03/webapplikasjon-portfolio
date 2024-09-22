@@ -1,23 +1,33 @@
-import Project from "./Project"
-import { ProjectProps } from "./Types"
-import { useState } from "react";
+import * as prosjekter from "./prosjektdata.json";
 
-type ProjectsProps = {
-    projects: ProjectProps[];
-};
+export default function Total({ total }: { total: number }) {
+  const categoryCounts = {};
+  const projects = prosjekter.prosjekter;
 
-export default function Total(props: Readonly<ProjectProps>) {
-    const { total } = props
+  projects.forEach((project) => {
+    const { kategorier } = project;
 
-    const [projects, setProjects] = useState<ProjectProps[]>(
-        props.projects ?? []
-    );
+    kategorier.forEach((category) => {
+      if (category in categoryCounts) {
+        categoryCounts[category]++;
+      } else {
+        categoryCounts[category] = 1;
+      }
+    });
+  });
 
-    return (
-        projects.map((project) => (
-            <>
-                <Total category={project.category}></Total>
-            </>
-        ))
-    )
+  return (
+    <>
+      <section>
+        <h4>Oversikt over alle kategorier</h4>
+        <ul>
+          {Object.keys(categoryCounts).map((category) => (
+            <li key={category}>
+              {category}: {categoryCounts[category]} prosjekter
+            </li>
+          ))}
+        </ul>
+      </section>
+    </>
+  );
 }
