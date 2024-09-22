@@ -16,9 +16,15 @@ export default function CreateProject({ onAddProject }: AddProjectFormProps) {
   const [repolinkIsDirty, setRepoLinkIsDirty] = useState(false);
   const [repolinkIsTouched, setRepoLinkIsTouched] = useState(false);
 
+  const [categoryValid, setCategoryValid] = useState(false);
+  const [categoryIsDirty, setCategoryIsDirty] = useState(false);
+  const [categoryIsTouched, setCategoryIsTouched] = useState(false);
+
   const [title, setTitle] = useState("");
   const [description, setDescription] = useState("");
   const [repolink, setRepoLink] = useState("");
+  const [category, setCategory] = useState("");
+
 
   const [input, setInput] = useState<
     { id: string; title: string; description: string; repolink: string }[]
@@ -45,6 +51,13 @@ export default function CreateProject({ onAddProject }: AddProjectFormProps) {
     setRepoLink(input.value);
   };
 
+  const updateFormCategory = (event: FormEvent<HTMLInputElement>) => {
+    const input = event.target as HTMLInputElement | null;
+    if (!input) return;
+    setCategoryIsDirty(true);
+    setCategory(input.value);
+  };
+
   const validateTitleInput = (title: string) => {
     if (titleIsTouched && titleIsDirty) {
       setTitleValid(title.trim().length > 2);
@@ -63,27 +76,35 @@ export default function CreateProject({ onAddProject }: AddProjectFormProps) {
     }
   };
 
+  const validateCategoryInput = (category: string) => {
+    if (categoryIsTouched && categoryIsDirty) {
+      setRepoLinkValid(category.trim().length > 2);
+    }
+  };
+
+
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!title || !description || !repolink) return;
+    if (!title || !description || !category || !repolink) return;
 
     const form = e.target as HTMLFormElement | null;
 
     if (!form) return;
 
-    onAddProject({ title, description, repo_link: repolink });
+    onAddProject({ title, description, category, repo_link: repolink });
 
-    console.log(title, description, repolink);
+    console.log(title, description, category, repolink);
 
     setInput((prevInput) => [
       ...prevInput,
-      { id: crypto.randomUUID(), title, description, repolink },
+      { id: crypto.randomUUID(), title, description, category, repolink },
     ]);
 
     setTitle("");
     setDescription("");
     setRepoLink("");
+    setCategory("")
     setTitleIsDirty(false);
     setTitleIsTouched(false);
     setTitleValid(false);
@@ -93,11 +114,14 @@ export default function CreateProject({ onAddProject }: AddProjectFormProps) {
     setRepoLinkIsDirty(false);
     setRepoLinkIsTouched(false);
     setRepoLinkValid(false);
+    setCategoryIsDirty(false);
+    setCategoryIsTouched(false);
+    setCategoryValid(false);
   };
 
   return (
     <section>
-      <pre>{JSON.stringify({ title, description, repolink })}</pre>
+      <pre>{JSON.stringify({ title, description, category, repolink })}</pre>
       <form onSubmit={handleSubmit}>
         <label htmlFor="title">
           Prosjekt tittel:
@@ -136,6 +160,27 @@ export default function CreateProject({ onAddProject }: AddProjectFormProps) {
           />
           {!descriptionValid && descriptionIsDirty ? (
             <p className="warning">OBS! Teksten må være minst 3 tegn langt</p>
+          ) : null}
+        </label>
+        <label htmlFor="category">
+          Kategori:
+          <input
+            type="text"
+            id="category"
+            name="category"
+            onChange={updateFormCategory}
+            onFocus={() => {
+              console.log("onFocus");
+              setCategoryIsTouched(true);
+            }}
+            onBlur={() => {
+              console.log("onBlur");
+              validateCategoryInput(category);
+            }}
+            value={category}
+          />
+          {!categoryValid && categoryIsDirty ? (
+            <p className="warning">OBS! Input må være minst 3 tegn langt</p>
           ) : null}
         </label>
         <label htmlFor="repolink">

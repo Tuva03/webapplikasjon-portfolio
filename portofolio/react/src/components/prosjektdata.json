@@ -4,13 +4,22 @@
       "id": "1",
       "prosjekt_navn": "Prosjekt eksempel 1",
       "beskrivelse": "Her kommer det kul beskrivelse",
-      "repo_link": "Her kommer linken til repoet"
+      "repo_link": "Her kommer linken til repoet",
+      "kategori": "Frontend"
     },
     {
       "id": "2",
       "prosjekt_navn": "Prosjekt eksempel 2",
       "beskrivelse": "Her kommer det kul beskrivelse",
-      "repo_link": "Her kommer linken til repoet"
+      "repo_link": "Her kommer linken til repoet",
+      "kategori": "Backend"
+    },
+    {
+      "id": "3",
+      "prosjekt_navn": "Prosjekt eksempel 3",
+      "beskrivelse": "Her kommer det kul beskrivelse",
+      "repo_link": "Her kommer linken til repoet",
+      "kategori": "Backend"
     }
   ]
 }

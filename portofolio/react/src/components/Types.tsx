@@ -6,6 +6,7 @@ export type AddProjectFormProps = {
   onAddProject: (project: {
     title: string;
     description: string;
+    category: string;
     repo_link: string;
   }) => void;
 };
@@ -26,6 +27,7 @@ export type ProjectProps = {
   id: string;
   prosjekt_navn: string;
   beskrivelse: string;
+  kategori: string;
   repo_link: string;
 };
 

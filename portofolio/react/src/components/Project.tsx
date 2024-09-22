@@ -4,13 +4,14 @@ import { useState } from "react";
 import { ProjectProps } from "./Types";
 
 function Project(props: Readonly<PropsWithChildren<ProjectProps>>) {
-  const { children, prosjekt_navn, beskrivelse, repo_link } = props;
+  const { children, prosjekt_navn, beskrivelse, kategori, repo_link } = props;
   return (
     <>
       {children}
       <article>
         <h3>{prosjekt_navn}</h3>
         <p>Beskrivelse: {beskrivelse}</p>
+        <p>Kategori: {kategori}</p>
         <a>Link: {repo_link}</a>
       </article>
     </>
@@ -29,6 +30,7 @@ export default function Projects(props: Readonly<ProjectsProps>) {
   const onAddProject = (project: {
     title: string;
     description: string;
+    category: string;
     repo_link: string;
   }) => {
     setProjects((prev) => [
@@ -37,6 +39,7 @@ export default function Projects(props: Readonly<ProjectsProps>) {
         id: crypto.randomUUID(),
         prosjekt_navn: project.title, // Mapping title to prosjekt_navn
         beskrivelse: project.description, // Mapping description to beskrivelse
+        kategori: project.category, // Mapping 
         repo_link: project.repo_link, // Keeping repo_link as is
       },
     ]);
@@ -58,6 +61,7 @@ export default function Projects(props: Readonly<ProjectsProps>) {
                 id={project.id}
                 prosjekt_navn={project.prosjekt_navn}
                 beskrivelse={project.beskrivelse}
+                kategori={project.kategori}
                 repo_link={project.repo_link}
               />
               <button onClick={() => removeProject(project.id)} type="button">
