@@ -2,7 +2,7 @@ import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { serveStatic } from "@hono/node-server/serve-static";
-import { ProjectSchema, type Project } from "./types";
+import { Project, ProjectSchema } from "../types";
 import fs from "node:fs/promises";
 
 const app = new Hono();
@@ -22,9 +22,9 @@ let projects: Project[] = [
 ];
 
 // Henter alle prosjekter fra serveren
-app.get("/json", async (c) => {
+app.get("/projects", async (c) => {
   const data = await fs.readFile(
-    "./react/src/components/prosjektdata.json",
+    "./frontend/src/components/prosjektdata.json",
     "utf8"
   );
   const dataAsJson = JSON.parse(data);
