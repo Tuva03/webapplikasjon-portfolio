@@ -24,7 +24,7 @@ let projects: Project[] = [
 // Henter alle prosjekter fra serveren
 app.get("/projects", async (c) => {
   const data = await fs.readFile(
-    "./frontend/src/components/prosjektdata.json",
+    "../frontend/src/components/prosjektdata.json",
     "utf8"
   );
   const dataAsJson = JSON.parse(data);

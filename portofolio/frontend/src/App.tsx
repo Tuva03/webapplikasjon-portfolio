@@ -4,7 +4,8 @@ import Header from "./components/Header";
 import Experiences from "./components/Experience";
 import Contact from "./components/Contact";
 import * as prosjekter from "./components/prosjektdata.json";
-import { useEffect, useState } from "react";
+import { useState } from "react";
+import Footer from "./components/Footer";
 
 function App() {
   const student = {
@@ -20,19 +21,17 @@ function App() {
 
   const prosjektlise = prosjekter.prosjekter;
   const [projects, setProjects] = useState<ProjectProps[]>(prosjektlise);
-  const [error, setError] = useState<string | null>(null);
 
   return (
-    <main>
-      <Header
-        name={student.name}
-        degree={student.degree}
-        points={student.points}
-      />
-      <Experiences experiences={student.experiences} />
-      <Contact email={student.email} />
-      <Projects projects={projects} />
-    </main>
+    <>
+      <Header />
+      <div id="main">
+        <Experiences experiences={student.experiences} />
+        <Contact email={student.email} />
+        <Projects projects={projects} />
+      </div>
+      <Footer />
+    </>
   );
 }
 

@@ -5,6 +5,10 @@
   --formColor: #8599da;
 }
 
+p {
+  font-size: 16px;
+}
+
 body {
   margin: 0;
   background-color: rgb(227, 235, 238);
@@ -37,6 +41,49 @@ header nav {
   padding: 0rem 2.5rem;
 }
 
+section#erfaringer {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+section#erfaringer ul {
+  margin: 0;
+}
+
+section#erfaringer ul li {
+  padding: 0.5rem;
+  font-size: 16px;
+}
+
+section#kontakt {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+section#kontakt button {
+  max-width: 250px;
+}
+
+section#kontakt form {
+  display: flex;
+  flex-wrap: wrap;
+  align-content: center;
+  gap: 1rem;
+}
+
+section#kontakt form input[type="text"] {
+  background-color: white;
+  padding: 8px;
+  border-radius: 5px;
+  font-size: 16px;
+  min-width: 150px;
+  margin-left: 5px;
+}
+
 section#prosjekter {
   display: flex;
   flex-wrap: wrap;
@@ -54,6 +101,23 @@ article {
   max-width: 500px;
   border-style: solid;
   border-width: 1px;
+  min-width: 250px;
+}
+
+section#prosjekter article a {
+  margin: 1rem 0rem 1rem 0rem;
+}
+
+section#prosjekter article button {
+  padding: 8px;
+  background-color: var(--articleColor);
+  border-radius: 5px;
+  font-size: 16px;
+  cursor: pointer;
+  position: relative;
+  margin-top: 1rem;
+  background: var(--footerColor);
+  color: white;
 }
 
 section#legg_til_prosjekt {
@@ -78,17 +142,32 @@ section#legg_til_prosjekt form input[type="text"] {
   padding: 8px;
   border-radius: 5px;
   font-size: 16px;
-  width: 125%;
+  width: 100%;
   min-width: 150px;
 }
 
 button {
-  padding: 10px;
+  padding: 8px;
   background-color: var(--articleColor);
   border-radius: 5px;
   font-size: 16px;
   cursor: pointer;
   position: relative;
+}
+
+section#total {
+  display: flex;
+  flex-wrap: wrap;
+  flex-direction: column;
+  padding: 1rem;
+}
+
+section#total ul {
+  margin: 0;
+}
+
+section#total ul li {
+  padding: 0.5rem;
 }
 
 footer {

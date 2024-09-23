@@ -2,7 +2,7 @@
   "name": "backend",
   "scripts": {
     "dev:frontend": "vite",
-    "dev:server": "tsx --watch server.ts",
+    "dev:server": "tsx --watch src/server.ts",
     "dev": "concurrently -n frontend,server -c green,blue \"pnpm run dev:frontend\" \"pnpm run dev:server\""
   },
   "dependencies": {

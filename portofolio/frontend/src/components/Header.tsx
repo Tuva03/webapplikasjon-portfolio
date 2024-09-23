@@ -1,12 +1,13 @@
-import { HeaderProps } from "./Types";
-
-export default function Header(props: HeaderProps) {
+export default function Header() {
   return (
     <header>
-      <p>
-        Studenten {props.name} studerer {props.degree} og har for øyeblikket{" "}
-        {props.points} studiepoeng!
-      </p>
+      <a href="#">Hjem</a>
+      <h1>Portofolie til Tuva Marie Andersen</h1>
+      <nav>
+        <a href="#">Mine prosjekter</a>
+        <a href="#">Om meg</a>
+        <a href="#">Kontakt meg</a>
+      </nav>
     </header>
   );
 }

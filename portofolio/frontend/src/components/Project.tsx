@@ -1,20 +1,19 @@
 import type { PropsWithChildren } from "react";
 import CreateProject from "./CreateProject";
-import { useState } from "react";
+import { useEffect, useState } from "react";
 import { ProjectProps } from "./Types";
 import Total from "./Total";
+import { ofetch } from "ofetch";
 
 function Project(props: Readonly<PropsWithChildren<ProjectProps>>) {
-  const { children, prosjekt_navn, beskrivelse, kategori, repo_link } = props;
+  const { children, prosjekt_navn, beskrivelse, kategorier, repo_link } = props;
   return (
     <>
       {children}
-      <article>
-        <h3>{prosjekt_navn}</h3>
-        <p>Beskrivelse: {beskrivelse}</p>
-        <p>Kategori: {kategori}</p>
-        <a>Link: {repo_link}</a>
-      </article>
+      <h3>{prosjekt_navn}</h3>
+      <p>Beskrivelse: {beskrivelse}</p>
+      <p>Kategorier: {kategorier.join(", ")}</p>
+      <a>Link: {repo_link}</a>
     </>
   );
 }
@@ -31,17 +30,17 @@ export default function Projects(props: Readonly<ProjectsProps>) {
   const onAddProject = (project: {
     title: string;
     description: string;
-    category: string;
+    categories: string;
     repo_link: string;
   }) => {
     setProjects((prev) => [
       ...prev,
       {
         id: crypto.randomUUID(),
-        prosjekt_navn: project.title, // Mapping title to prosjekt_navn
-        beskrivelse: project.description, // Mapping description to beskrivelse
-        kategori: project.category, // Mapping
-        repo_link: project.repo_link, // Keeping repo_link as is
+        prosjekt_navn: project.title,
+        beskrivelse: project.description,
+        kategorier: project.categories,
+        repo_link: project.repo_link,
       },
     ]);
   };
@@ -50,34 +49,51 @@ export default function Projects(props: Readonly<ProjectsProps>) {
     setProjects((prev) => prev.filter((project) => project.id !== id));
   };
 
+  const initializeData = async () => {
+    console.log("Fetching data...");
+    try {
+      const fetchedProjects = await ofetch("http://localhost:3999/projects");
+      console.log("Data fetched");
+      setProjects(fetchedProjects.prosjekter);
+      console.log("Data initialized");
+    } catch (error) {
+      console.error("Error fetching projects:", error);
+    }
+  };
+
+  useEffect(() => {
+    initializeData();
+  }, []);
+
   return (
-    <div>
-      <section>
+    <>
+      <section id="prosjekter">
         {projects.length === 0 ? (
           <p>Du har ingen prosjekter</p>
         ) : (
           projects.map((project) => (
-            <>
+            <article key={project.id}>
+              {" "}
               <Project
                 id={project.id}
                 prosjekt_navn={project.prosjekt_navn}
                 beskrivelse={project.beskrivelse}
-                kategori={project.kategori}
+                kategorier={project.kategorier}
                 repo_link={project.repo_link}
               />
-              <button onClick={() => removeProject(project.id)} type="button">
+              <button
+                id="fjern_prosjekt"
+                onClick={() => removeProject(project.id)}
+                type="button"
+              >
                 Fjern prosjekt
               </button>
-            </>
+            </article>
           ))
         )}
       </section>
-      <section>
-        <CreateProject onAddProject={onAddProject} />
-      </section>
-      <section>
-        <Total total={projects.length} />
-      </section>
-    </div>
+      <Total total={projects.length} />
+      <CreateProject onAddProject={onAddProject} />
+    </>
   );
 }

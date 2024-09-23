@@ -1,6 +1,7 @@
 import { z } from "zod";
 
 export const ProjectSchema = z.object({
+  id: z.string(),
   prosjekt_navn: z.string(),
   beskrivelse: z.string(),
   repo_link: z.string(),

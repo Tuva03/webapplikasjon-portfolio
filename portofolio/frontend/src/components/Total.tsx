@@ -18,8 +18,8 @@ export default function Total({ total }: { total: number }) {
 
   return (
     <>
-      <section>
-        <h4>Oversikt over alle kategorier</h4>
+      <section id="total">
+        <h3>Oversikt over alle kategorier</h3>
         <ul>
           {Object.keys(categoryCounts).map((category) => (
             <li key={category}>

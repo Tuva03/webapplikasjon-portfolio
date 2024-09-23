@@ -77,9 +77,11 @@ export default function Contact(props: Readonly<ContactProps>) {
   };
 
   return (
-    <section>
+    <section id="kontakt">
       <p>Kontaktinformasjon: {email}</p>
-      <button onClick={handleClick}>Vis kontaktinformasjon</button>
+      <button id="kontaktinfo" onClick={handleClick}>
+        Vis kontaktinformasjonen min
+      </button>
       <pre>{JSON.stringify({ name, textarea })}</pre>
       <form onSubmit={contactStudent}>
         <label htmlFor="name">
@@ -88,6 +90,7 @@ export default function Contact(props: Readonly<ContactProps>) {
             type="text"
             id="name"
             name="name"
+            placeholder="Navnet ditt..."
             onChange={updateFormName}
             onFocus={() => {
               console.log("onFocus");
@@ -109,6 +112,7 @@ export default function Contact(props: Readonly<ContactProps>) {
             type="text"
             id="textarea"
             name="textarea"
+            placeholder="Hva du vil si til meg..."
             onChange={updateFormTextArea}
             onFocus={() => {
               console.log("onFocus");
@@ -124,7 +128,9 @@ export default function Contact(props: Readonly<ContactProps>) {
             <p className="warning">OBS! Teksten må være minst 3 tegn langt</p>
           ) : null}
         </label>
-        <button type="submit">Send kontaktskjema</button>
+        <button id="kontaktsubmit" type="submit">
+          Send kontaktskjema
+        </button>
       </form>
     </section>
   );
