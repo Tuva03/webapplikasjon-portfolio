@@ -21,24 +21,23 @@ header {
   gap: 1rem;
   align-items: center;
   background-color: var(--headerColor);
-}
 
-header h1 {
-  color: white;
-  padding-left: 3rem;
-}
+  & h1 {
+    color: white;
+    padding-left: 3rem;
+  }
 
-header a {
-  color: white;
-  font-size: 25px;
-}
-
-header nav {
-  display: flex;
-  flex-wrap: wrap;
-  margin-left: auto;
-  gap: 2rem;
-  padding: 0rem 2.5rem;
+  & a {
+    color: white;
+    font-size: 25px;
+  }
+  & nav {
+    display: flex;
+    flex-wrap: wrap;
+    margin-left: auto;
+    gap: 2rem;
+    padding: 0rem 2.5rem;
+  }
 }
 
 section#erfaringer {
@@ -46,15 +45,15 @@ section#erfaringer {
   flex-wrap: wrap;
   flex-direction: column;
   padding: 1rem;
-}
 
-section#erfaringer ul {
-  margin: 0;
-}
+  & ul {
+    margin: 0;
 
-section#erfaringer ul li {
-  padding: 0.5rem;
-  font-size: 16px;
+    & li {
+      padding: 0.5rem;
+      font-size: 16px;
+    }
+  }
 }
 
 section#kontakt {
@@ -62,97 +61,138 @@ section#kontakt {
   flex-wrap: wrap;
   flex-direction: column;
   padding: 1rem;
+
+  & button {
+    padding: 8px;
+    /* background-color: var(--articleColor);*/
+    border-radius: 5px;
+    font-size: 16px;
+    cursor: pointer;
+    position: relative;
+    max-width: 250px;
+  }
+
+  & form {
+    display: flex;
+    flex-wrap: wrap;
+    align-content: center;
+    gap: 1rem;
+
+    & input[type="text"] {
+      background-color: white;
+      padding: 8px;
+      border-radius: 5px;
+      font-size: 16px;
+      min-width: 150px;
+      margin-left: 5px;
+    }
+  }
 }
 
-section#kontakt button {
-  max-width: 250px;
-}
-
-section#kontakt form {
-  display: flex;
-  flex-wrap: wrap;
-  align-content: center;
-  gap: 1rem;
-}
-
-section#kontakt form input[type="text"] {
-  background-color: white;
-  padding: 8px;
-  border-radius: 5px;
-  font-size: 16px;
-  min-width: 150px;
-  margin-left: 5px;
-}
-
-section#prosjekter {
-  display: flex;
+#prosjekter {
+  /*display: flex;*/
   flex-wrap: wrap;
   padding: 4rem;
-  gap: 1rem;
 }
 
-article {
-  background-color: var(--articleColor);
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  padding: 1rem;
-  border-radius: 5px;
-  max-width: 500px;
-  border-style: solid;
-  border-width: 1px;
-  min-width: 250px;
-}
+.prosjekt_grid {
+  display: grid;
+  grid-template-columns: repeat(auto-fit, minmax(min(250px, 100%), 1fr));
+  gap: 2rem;
 
-section#prosjekter article a {
-  margin: 1rem 0rem 1rem 0rem;
-}
+  & article {
+    background-color: var(--articleColor);
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    padding: 1rem;
+    border-radius: 5px;
+    max-width: 500px;
+    border-style: solid;
+    border-width: 1px;
+    min-width: 100px;
 
-section#prosjekter article button {
-  padding: 8px;
-  background-color: var(--articleColor);
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  position: relative;
-  margin-top: 1rem;
-  background: var(--footerColor);
-  color: white;
-}
+    & .prosjekt_grid-item {
+      display: flex;
+      flex-direction: column;
+    }
 
+    & a {
+      margin: 1rem 0rem 1rem 0rem;
+    }
+
+    & button {
+      padding: 8px;
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      position: relative;
+      margin-top: 1rem;
+      /*background: var(--footerColor);*/
+      color: white;
+      max-width: 150px;
+    }
+  }
+}
 section#legg_til_prosjekt {
   background-color: var(--formColor);
   display: flex;
   flex-wrap: wrap;
   justify-content: center;
+
+  & form {
+    display: flex;
+    flex-wrap: wrap;
+    flex-direction: column;
+    align-content: center;
+    padding: 4rem 0rem;
+    gap: 1.5rem;
+    width: 25%;
+
+    & pre {
+      display: flex;
+      flex-wrap: wrap;
+    }
+
+    & label {
+      align-self: center;
+    }
+
+    & input[type="text"] {
+      background-color: white;
+      display: flex;
+      flex-wrap: wrap;
+      padding: 8px;
+      border-radius: 5px;
+      font-size: 16px;
+      width: 100%;
+      min-width: 150px;
+    }
+
+    & button {
+      display: flex;
+      flex-wrap: wrap;
+      padding: 8px;
+      /*background-color: var(--articleColor);*/
+      border-radius: 5px;
+      font-size: 16px;
+      cursor: pointer;
+      position: relative;
+      align-self: center;
+    }
+  }
 }
 
-section#legg_til_prosjekt form {
-  display: flex;
-  flex-wrap: wrap;
-  flex-direction: column;
-  align-content: center;
-  padding: 4rem 0rem;
-  gap: 1.5rem;
-  width: 15%;
+:is(#fjern_prosjekt) {
+  background-color: var(--footerColor);
 }
 
-section#legg_til_prosjekt form input[type="text"] {
-  background-color: white;
-  padding: 8px;
-  border-radius: 5px;
-  font-size: 16px;
-  width: 100%;
-  min-width: 150px;
+:is(button#kontaktinfo, button#kontaktsubmit) {
+  background-color: var(--articleColor);
 }
 
 button {
-  padding: 8px;
   background-color: var(--articleColor);
-  border-radius: 5px;
-  font-size: 16px;
-  cursor: pointer;
-  position: relative;
 }
 
 section#total {
@@ -160,33 +200,33 @@ section#total {
   flex-wrap: wrap;
   flex-direction: column;
   padding: 1rem;
-}
 
-section#total ul {
-  margin: 0;
-}
+  & ul {
+    margin: 0;
 
-section#total ul li {
-  padding: 0.5rem;
+    & li {
+      padding: 0.5rem;
+    }
+  }
 }
 
 footer {
   background-color: var(--headerColor);
   padding: 2rem 4rem;
   display: flex;
-  flex-wrap: nowrap;
+  flex-wrap: wrap;
   flex-direction: row;
   gap: 2rem;
   align-items: center;
   justify-content: space-between;
-}
 
-footer p {
-  color: white;
-  font-size: 18px;
-}
+  & p {
+    color: white;
+    font-size: 18px;
+  }
 
-footer a {
-  color: white;
-  font-size: 18px;
+  & a {
+    color: white;
+    font-size: 18px;
+  }
 }

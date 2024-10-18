@@ -1,13 +1,17 @@
-import Projects from "./components/Project";
+import Projects from "./features/projects/components/Project";
 import type { ProjectProps } from "./components/Types";
-import Header from "./components/Header";
 import Experiences from "./components/Experience";
 import Contact from "./components/Contact";
 import * as prosjekter from "./components/prosjektdata.json";
-import { useState } from "react";
-import Footer from "./components/Footer";
+import { PropsWithChildren, useState } from "react";
+import Layout from "./components/Layout";
+import ProjectPage from "./features/projects/pages";
 
-function App() {
+type AppProps = PropsWithChildren;
+
+export default function App(props: AppProps) {
+  const { children } = props;
+
   const student = {
     name: "Halgeir Geirson",
     degree: "Bachelor i IT",
@@ -24,15 +28,12 @@ function App() {
 
   return (
     <>
-      <Header />
-      <div id="main">
+      <Layout>
         <Experiences experiences={student.experiences} />
         <Contact email={student.email} />
-        <Projects projects={projects} />
-      </div>
-      <Footer />
+        <ProjectPage />
+        {/* <Projects projects={projects} /> */}
+      </Layout>
     </>
   );
 }
-
-export default App;

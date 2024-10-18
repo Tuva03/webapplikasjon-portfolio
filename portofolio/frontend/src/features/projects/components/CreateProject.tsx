@@ -1,5 +1,5 @@
 import { useState, type FormEvent } from "react";
-import { AddProjectFormProps } from "./Types";
+import { AddProjectFormProps } from "../../../components/Types";
 
 export default function CreateProject({ onAddProject }: AddProjectFormProps) {
   const [titleValid, setTitleValid] = useState(false);

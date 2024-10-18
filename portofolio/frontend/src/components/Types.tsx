@@ -6,7 +6,7 @@ export type AddProjectFormProps = {
   onAddProject: (project: {
     title: string;
     description: string;
-    categories: string;
+    categories: string | string[];
     repo_link: string;
   }) => void;
 };
@@ -25,9 +25,9 @@ export type HeaderProps = {
 
 export type ProjectProps = {
   id: string;
-  prosjekt_navn: string;
+  title: string;
   beskrivelse: string;
-  kategorier: string;
+  categories: string | string[];
   repo_link: string;
 };
 

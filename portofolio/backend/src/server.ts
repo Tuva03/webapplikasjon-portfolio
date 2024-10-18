@@ -15,7 +15,7 @@ app.use("/portofolio/*", serveStatic({ root: "./" }));
 let projects: Project[] = [
   {
     id: "1",
-    prosjekt_navn: "Prosjekt eksempel 1",
+    title: "Prosjekt eksempel 1",
     beskrivelse: "Her kommer det kul beskrivelse",
     repo_link: "Her kommer linken til repoet",
   },

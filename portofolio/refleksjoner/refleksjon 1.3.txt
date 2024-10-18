@@ -1,0 +1,4 @@
+Refleksjon 1.3:
+Refaktoreringer jeg kan gjøre er å implementere grid og subgrid til elementene mine i applikasjonen. Det vil forbedre layoutet i applikasjonen og gjøre oppsettet mer oversiktlig, 
+men kan brått ta tid å refaktorere alt innholdet til et grid-oppsett som er tilpasset alt.  For å tilpasse alt innholdet til grids og fortsatt følge wireframen, 
+må både komponentene og css'en gjøres om en del. 

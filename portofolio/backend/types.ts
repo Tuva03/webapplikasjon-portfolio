@@ -2,12 +2,12 @@ import { z } from "zod";
 
 export const ProjectSchema = z.object({
   id: z.string(),
-  prosjekt_navn: z.string(),
+  title: z.string(),
   beskrivelse: z.string(),
   repo_link: z.string(),
 });
 
-export const ProjectCreateSchema = ProjectSchema.omit({ prosjekt_navn: true });
+export const ProjectCreateSchema = ProjectSchema.omit({ title: true });
 
 export const ProjectArraySchema = z.array(ProjectSchema);
 

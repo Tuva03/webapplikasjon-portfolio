@@ -2,21 +2,21 @@
   "prosjekter": [
     {
       "id": "1",
-      "prosjekt_navn": "Prosjekt eksempel 1",
+      "title": "Prosjekt eksempel 1",
       "beskrivelse": "Her kommer det kul beskrivelse",
       "repo_link": "Her kommer linken til repoet",
       "kategorier": ["Frontend", "Backend"]
     },
     {
       "id": "2",
-      "prosjekt_navn": "Prosjekt eksempel 2",
+      "title": "Prosjekt eksempel 2",
       "beskrivelse": "Her kommer det kul beskrivelse",
       "repo_link": "Her kommer linken til repoet",
       "kategorier": ["Backend", "Spillprogrammering"]
     },
     {
       "id": "3",
-      "prosjekt_navn": "Prosjekt eksempel 3",
+      "title": "Prosjekt eksempel 3",
       "beskrivelse": "Her kommer det kul beskrivelse",
       "repo_link": "Her kommer linken til repoet",
       "kategorier": ["Backend"]

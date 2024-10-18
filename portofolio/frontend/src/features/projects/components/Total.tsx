@@ -1,4 +1,4 @@
-import * as prosjekter from "./prosjektdata.json";
+import * as prosjekter from "../../../components/prosjektdata.json";
 
 export default function Total({ total }: { total: number }) {
   const categoryCounts = {};
