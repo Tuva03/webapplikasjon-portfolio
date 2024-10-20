@@ -1,12 +1,18 @@
 // Projects.tsx
 import type { PropsWithChildren } from "react";
 import CreateProject from "./CreateProject";
-import { ProjectProps } from "../../../components/Types";
+import { Action, ProjectProps } from "../../../components/Types";
 import Total from "./Total";
 import useProjects from "../hooks/useProjects";
+import { formatDistance } from "../helpers/format";
+import { nb } from "date-fns/locale";
+import ProjectForm from "./ProjectForm";
 
 function Project(props: Readonly<PropsWithChildren<ProjectProps>>) {
-  const { children, title, beskrivelse, categories, repo_link } = props;
+  const { children, title, description, categories, repolink, publishedAt } =
+    props;
+
+  const formattedDate = new Date(publishedAt);
 
   const categoriesList = Array.isArray(categories)
     ? categories.join(", ")
@@ -16,19 +22,36 @@ function Project(props: Readonly<PropsWithChildren<ProjectProps>>) {
     <>
       {children}
       <h3>{title}</h3>
-      <p>Beskrivelse: {beskrivelse}</p>
+      <p>Beskrivelse: {description}</p>
       <p>Kategorier: {categoriesList}</p>
-      <a>Link: {repo_link}</a>
+      <a>Link: {repolink}</a>
+      <p>Publisert {formatDistance(formattedDate, new Date())} siden</p>
     </>
   );
 }
 
 type ProjectsProps = {
+  handleProjectMutation: (action: Action, project: Partial<Project>) => void;
   projects: ProjectProps[];
+  addProject: (project: {
+    title: string;
+    description: string;
+    categories: string | string[];
+    repolink: string;
+    publishedAt: Date;
+  }) => void;
 };
 
 export default function Projects(props: Readonly<ProjectsProps>) {
-  const { projects, onAddProject, removeProject } = useProjects(props.projects);
+  const { projects = [], handleProjectMutation, addProject, children } = props;
+
+  //const addProject = async (title: string) => {
+  //   handleProjectMutation("add", { title });
+  // };
+
+  const removeProject = (id: Id) => {
+    handleProjectMutation("remove", { id });
+  };
 
   return (
     <>
@@ -41,9 +64,10 @@ export default function Projects(props: Readonly<ProjectsProps>) {
               <Project
                 id={project.id}
                 title={project.title}
-                beskrivelse={project.beskrivelse}
+                description={project.description}
                 categories={project.categories}
-                repo_link={project.repo_link}
+                repolink={project.repolink}
+                publishedAt={project.publishedAt}
               />
               <button
                 id="fjern_prosjekt"
@@ -57,7 +81,7 @@ export default function Projects(props: Readonly<ProjectsProps>) {
         )}
       </section>
       <Total total={projects.length} />
-      <CreateProject onAddProject={onAddProject} />
+      <ProjectForm addProject={addProject} />
     </>
   );
 }

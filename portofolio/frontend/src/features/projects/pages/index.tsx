@@ -4,13 +4,12 @@ import Projects from "../components/Project";
 import { useEffect } from "react";
 
 export default function ProjectPage() {
-  useEffect(() => {
-    console.log("ProjectPage component mounted");
-  }, []);
+  //useEffect(() => {
+  //  console.log("ProjectPage component mounted");
+  //}, []);
 
   const initialProjects: Project[] = [];
-  const { projects, onAddProject, removeProject } =
-    useProjects(initialProjects);
+  const { projects, addProject, removeProject } = useProjects(initialProjects);
 
   const handleProjectMutation = (action: Action, data: Partial<Project>) => {
     const { id, ...project } = data;
@@ -19,11 +18,26 @@ export default function ProjectPage() {
     switch (action) {
       case "add":
         console.log("Adding project:", project);
-        onAddProject({
+
+        if (!project.publishedAt) {
+          console.error("publishedAt is undefined");
+          return; // Handle the case where publishedAt is not provided
+        }
+
+        const publishedAtDate = new Date(project.publishedAt);
+        console.log("Parsed publishedAt:", publishedAtDate);
+
+        if (isNaN(publishedAtDate.getTime())) {
+          console.error("Invalid publishedAt date:", project.publishedAt);
+          return; // Handle invalid date
+        }
+
+        addProject({
           title: project.title,
-          description: project.beskrivelse,
+          description: project.description,
           categories: project.categories,
-          repo_link: project.repo_link,
+          repolink: project.repolink,
+          publishedAt: publishedAtDate,
         });
 
         break;
@@ -41,7 +55,7 @@ export default function ProjectPage() {
   return (
     <Projects
       projects={projects}
-      onAddProject={onAddProject}
+      addProject={addProject}
       handleProjectMutation={handleProjectMutation}
     />
   );

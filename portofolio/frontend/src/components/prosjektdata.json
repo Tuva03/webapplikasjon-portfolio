@@ -3,23 +3,26 @@
     {
       "id": "1",
       "title": "Prosjekt eksempel 1",
-      "beskrivelse": "Her kommer det kul beskrivelse",
-      "repo_link": "Her kommer linken til repoet",
-      "kategorier": ["Frontend", "Backend"]
+      "description": "Her kommer det kul beskrivelse",
+      "repolink": "Her kommer linken til repoet",
+      "categories": ["Frontend", "Backend"],
+      "publishedAt": "2023-10-01T12:00:00Z"
     },
     {
       "id": "2",
       "title": "Prosjekt eksempel 2",
-      "beskrivelse": "Her kommer det kul beskrivelse",
-      "repo_link": "Her kommer linken til repoet",
-      "kategorier": ["Backend", "Spillprogrammering"]
+      "description": "Her kommer det kul beskrivelse",
+      "repolink": "Her kommer linken til repoet",
+      "categories": ["Backend", "Spillprogrammering"],
+      "publishedAt": "2023-10-05T15:30:00Z"
     },
     {
       "id": "3",
       "title": "Prosjekt eksempel 3",
-      "beskrivelse": "Her kommer det kul beskrivelse",
-      "repo_link": "Her kommer linken til repoet",
-      "kategorier": ["Backend"]
+      "description": "Her kommer det kul beskrivelse",
+      "repolink": "Her kommer linken til repoet",
+      "categories": ["Backend"],
+      "publishedAt": "2023-10-05T15:30:00Z"
     }
   ]
 }

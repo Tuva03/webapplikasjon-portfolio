@@ -1,7 +1,13 @@
 import { useState, type FormEvent } from "react";
-import { AddProjectFormProps } from "../../../components/Types";
+import { ProjectProps } from "../../../components/Types";
 
-export default function CreateProject({ addProject }: AddProjectFormProps) {
+type ProjectFormProps = {
+  addProject: (project: ProjectProps) => void;
+};
+
+export default function ProjectForm(props: Readonly<ProjectFormProps>) {
+  const { addProject } = props;
+
   const [titleValid, setTitleValid] = useState(false);
   const [titleIsDirty, setTitleIsDirty] = useState(false);
   const [titleIsTouched, setTitleIsTouched] = useState(false);
@@ -22,6 +28,7 @@ export default function CreateProject({ addProject }: AddProjectFormProps) {
   const [description, setDescription] = useState("");
   const [repolink, setRepoLink] = useState("");
   const [categories, setCategory] = useState("");
+  const [publishedAt, setPublishedAt] = useState("");
 
   const [input, setInput] = useState<
     {
@@ -89,8 +96,7 @@ export default function CreateProject({ addProject }: AddProjectFormProps) {
   const handleSubmit = (e: React.FormEvent) => {
     e.preventDefault();
 
-    if (!title || !description || !categories || !repolink || !publishedAt)
-      return;
+    const publishedAtDate = new Date(publishedAt);
 
     const form = e.target as HTMLFormElement | null;
 
@@ -101,7 +107,7 @@ export default function CreateProject({ addProject }: AddProjectFormProps) {
       description,
       categories,
       repolink,
-      publishedAt,
+      publishedAt: publishedAtDate,
     });
 
     console.log(title, description, categories, repolink, publishedAt);
@@ -114,7 +120,7 @@ export default function CreateProject({ addProject }: AddProjectFormProps) {
         description,
         categories,
         repolink,
-        publishedAt,
+        publishedAt: publishedAtDate,
       },
     ]);
 
@@ -122,6 +128,7 @@ export default function CreateProject({ addProject }: AddProjectFormProps) {
     setDescription("");
     setRepoLink("");
     setCategory("");
+    setPublishedAt("");
     setTitleIsDirty(false);
     setTitleIsTouched(false);
     setTitleValid(false);
@@ -225,10 +232,18 @@ export default function CreateProject({ addProject }: AddProjectFormProps) {
               <p className="warning">OBS! Linken må være minst 3 tegn langt</p>
             ) : null}
           </label>
+          <label htmlFor="publishedAt">Published Date (yyyy-mm-dd)</label>
+          <input
+            id="publishedAt"
+            type="date"
+            value={publishedAt}
+            onChange={(e) => setPublishedAt(e.target.value)}
+          />
+          {/*
           <pre>
-            {JSON.stringify({ title, description, categories, repolink })}
+            {JSON.stringify({ title, description, categories, repolink, publishedAt })}
           </pre>
-
+          */}
           <button type="submit">Legg til prosjekt</button>
         </form>
       </section>

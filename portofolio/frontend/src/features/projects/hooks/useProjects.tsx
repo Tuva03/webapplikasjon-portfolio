@@ -2,26 +2,30 @@
 import { useEffect, useState } from "react";
 import { ProjectProps } from "../../../components/Types";
 import { ofetch } from "ofetch";
+import { baseUrl, endpoints } from "../../../config/urls";
+import { projectsSchema } from "../helpers/validators";
 
 export default function useProjects(props: ProjectProps[] = []) {
   const [projects, setProjects] = useState<ProjectProps[]>(props);
 
-  const onAddProject = (project: {
+  const addProject = (project: {
     title: string;
     description: string;
     categories: string | string[];
-    repo_link: string;
+    repolink: string;
+    publishedAt: Date;
   }) => {
     setProjects((prev) => [
       ...prev,
       {
         id: crypto.randomUUID(),
         title: project.title,
-        beskrivelse: project.description,
+        description: project.description,
         categories: Array.isArray(project.categories)
           ? project.categories
           : [project.categories],
-        repo_link: project.repo_link,
+        repolink: project.repolink,
+        publishedAt: project.publishedAt,
       },
     ]);
   };
@@ -33,8 +37,10 @@ export default function useProjects(props: ProjectProps[] = []) {
   const initializeData = async () => {
     console.log("Fetching data...");
     try {
-      const fetchedProjects = await ofetch("http://localhost:3999/projects");
+      const fetchedProjects = await ofetch(endpoints.projects);
+      console.log(projectsSchema.safeParse(projects)); // Se feilene
       console.log("Data fetched");
+      //return projectsSchema.parse(projects.data);
       setProjects(fetchedProjects.prosjekter);
       console.log("Data initialized");
     } catch (error) {
@@ -46,5 +52,5 @@ export default function useProjects(props: ProjectProps[] = []) {
     initializeData();
   }, []);
 
-  return { projects, onAddProject, removeProject };
+  return { projects, addProject, removeProject };
 }

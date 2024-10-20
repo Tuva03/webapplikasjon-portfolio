@@ -5,9 +5,9 @@ export default function Total({ total }: { total: number }) {
   const projects = prosjekter.prosjekter;
 
   projects.forEach((project) => {
-    const { kategorier } = project;
+    const { categories } = project;
 
-    kategorier.forEach((category) => {
+    categories.forEach((category) => {
       if (category in categoryCounts) {
         categoryCounts[category]++;
       } else {

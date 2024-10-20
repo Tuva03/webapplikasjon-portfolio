@@ -1,10 +1,12 @@
 import { z } from "zod";
 
 export const ProjectSchema = z.object({
-  id: z.string(),
+  id: z.string().uuid(),
   title: z.string(),
-  beskrivelse: z.string(),
-  repo_link: z.string(),
+  description: z.string(),
+  categories: z.array(z.string()),
+  repolink: z.string(),
+  publishedAt: z.string().datetime(),
 });
 
 export const ProjectCreateSchema = ProjectSchema.omit({ title: true });

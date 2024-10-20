@@ -3,11 +3,12 @@ export type ContactProps = {
 };
 
 export type AddProjectFormProps = {
-  onAddProject: (project: {
+  addProject: (project: {
     title: string;
     description: string;
     categories: string | string[];
-    repo_link: string;
+    repolink: string;
+    publishedAt: Date;
   }) => void;
 };
 
@@ -26,9 +27,10 @@ export type HeaderProps = {
 export type ProjectProps = {
   id: string;
   title: string;
-  beskrivelse: string;
+  description: string;
   categories: string | string[];
-  repo_link: string;
+  repolink: string;
+  publishedAt: Date;
 };
 
 export const actions = {

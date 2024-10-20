@@ -16,8 +16,10 @@ let projects: Project[] = [
   {
     id: "1",
     title: "Prosjekt eksempel 1",
-    beskrivelse: "Her kommer det kul beskrivelse",
-    repo_link: "Her kommer linken til repoet",
+    description: "Her kommer det kul beskrivelse",
+    categories: ["En kategorie", "Enda en kategori"],
+    repolink: "Her kommer linken til repoet",
+    publishedAt: "Her kommer dato prosjektet ble opprettet",
   },
 ];
 

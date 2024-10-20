@@ -1,6 +1,6 @@
 const baseUrl = import.meta.env.baseUrl ?? "http://localhost:3999";
-const endpoint = {
+const endpointV1 = {
   projects: `${baseUrl}/projects`,
 };
 
-export { baseUrl, endpoint as endpoints };
+export { baseUrl, endpointV1 as endpoints };
