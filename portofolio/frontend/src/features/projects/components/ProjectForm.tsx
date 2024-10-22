@@ -232,7 +232,7 @@ export default function ProjectForm(props: Readonly<ProjectFormProps>) {
               <p className="warning">OBS! Linken må være minst 3 tegn langt</p>
             ) : null}
           </label>
-          <label htmlFor="publishedAt">Published Date (yyyy-mm-dd)</label>
+          <label htmlFor="publishedAt">Publiserings dato (yyyy-mm-dd)</label>
           <input
             id="publishedAt"
             type="date"

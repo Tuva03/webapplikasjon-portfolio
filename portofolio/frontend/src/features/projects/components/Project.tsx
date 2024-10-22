@@ -1,11 +1,8 @@
 // Projects.tsx
 import type { PropsWithChildren } from "react";
-import CreateProject from "./CreateProject";
 import { Action, ProjectProps } from "../../../components/Types";
 import Total from "./Total";
-import useProjects from "../hooks/useProjects";
 import { formatDistance } from "../helpers/format";
-import { nb } from "date-fns/locale";
 import ProjectForm from "./ProjectForm";
 
 function Project(props: Readonly<PropsWithChildren<ProjectProps>>) {
@@ -24,8 +21,10 @@ function Project(props: Readonly<PropsWithChildren<ProjectProps>>) {
       <h3>{title}</h3>
       <p>Beskrivelse: {description}</p>
       <p>Kategorier: {categoriesList}</p>
-      <a>Link: {repolink}</a>
-      <p>Publisert {formatDistance(formattedDate, new Date())} siden</p>
+      <p>
+        Link: <a href={repolink}>{repolink}</a>
+      </p>
+      <p>Publisert {formatDistance(formattedDate, new Date())}</p>
     </>
   );
 }

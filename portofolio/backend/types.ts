@@ -7,6 +7,9 @@ export const ProjectSchema = z.object({
   categories: z.array(z.string()),
   repolink: z.string(),
   publishedAt: z.string().datetime(),
+  public: z.boolean(),
+  status: z.boolean(),
+  tags: z.array(z.string()),
 });
 
 export const ProjectCreateSchema = ProjectSchema.omit({ title: true });
