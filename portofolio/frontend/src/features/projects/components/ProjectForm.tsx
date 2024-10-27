@@ -1,5 +1,6 @@
 import { useState, type FormEvent } from "react";
 import { ProjectProps } from "../../../components/Types";
+import UseProjectForm from "../hooks/useProjectForm";
 
 type ProjectFormProps = {
   addProject: (project: ProjectProps) => void;
@@ -8,140 +9,35 @@ type ProjectFormProps = {
 export default function ProjectForm(props: Readonly<ProjectFormProps>) {
   const { addProject } = props;
 
-  const [titleValid, setTitleValid] = useState(false);
-  const [titleIsDirty, setTitleIsDirty] = useState(false);
-  const [titleIsTouched, setTitleIsTouched] = useState(false);
+  const {
+    handleSubmit,
 
-  const [descriptionValid, setDescriptionValid] = useState(false);
-  const [descriptionIsDirty, setDescriptionIsDirty] = useState(false);
-  const [descriptionIsTouched, setDescriptionIsTouched] = useState(false);
+    title,
+    isInvalidTitle,
+    updateFormTitle,
+    setTitleIsTouched,
+    validateTitleInput,
 
-  const [repolinkValid, setRepoLinkValid] = useState(false);
-  const [repolinkIsDirty, setRepoLinkIsDirty] = useState(false);
-  const [repolinkIsTouched, setRepoLinkIsTouched] = useState(false);
+    description,
+    isInvalidDescription,
+    updateFormDescription,
+    setDescriptionIsTouched,
+    validateDescriptionInput,
 
-  const [categoryValid, setCategoryValid] = useState(false);
-  const [categoryIsDirty, setCategoryIsDirty] = useState(false);
-  const [categoryIsTouched, setCategoryIsTouched] = useState(false);
+    categories,
+    isInvalidCategory,
+    updateFormCategory,
+    setCategoryIsTouched,
+    validateCategoryInput,
 
-  const [title, setTitle] = useState("");
-  const [description, setDescription] = useState("");
-  const [repolink, setRepoLink] = useState("");
-  const [categories, setCategory] = useState("");
-  const [publishedAt, setPublishedAt] = useState("");
+    repolink,
+    isInvalidRepolink,
+    updateFormRepoLink,
+    setRepoLinkIsTouched,
+    validateRepoLinkInput,
 
-  const [input, setInput] = useState<
-    {
-      id: string;
-      title: string;
-      description: string;
-      categories: string;
-      repolink: string;
-      publishedAt: Date;
-    }[]
-  >([]);
-
-  const updateFormTitle = (event: FormEvent<HTMLInputElement>) => {
-    const input = event.target as HTMLInputElement | null;
-    if (!input) return;
-    setTitleIsDirty(true);
-    setTitle(input.value);
-  };
-
-  const updateFormDescription = (event: FormEvent<HTMLInputElement>) => {
-    const input = event.target as HTMLInputElement | null;
-    if (!input) return;
-    setDescriptionIsDirty(true);
-    setDescription(input.value);
-  };
-
-  const updateFormRepoLink = (event: FormEvent<HTMLInputElement>) => {
-    const input = event.target as HTMLInputElement | null;
-    if (!input) return;
-    setRepoLinkIsDirty(true);
-    setRepoLink(input.value);
-  };
-
-  const updateFormCategory = (event: FormEvent<HTMLInputElement>) => {
-    const input = event.target as HTMLInputElement | null;
-    if (!input) return;
-    setCategoryIsDirty(true);
-    setCategory(input.value);
-  };
-
-  const validateTitleInput = (title: string) => {
-    if (titleIsTouched && titleIsDirty) {
-      setTitleValid(title.trim().length > 2);
-    }
-  };
-
-  const validateDescriptionInput = (description: string) => {
-    if (descriptionIsTouched && descriptionIsDirty) {
-      setDescriptionValid(description.trim().length > 2);
-    }
-  };
-
-  const validateRepoLinkInput = (repolink: string) => {
-    if (repolinkIsTouched && repolinkIsDirty) {
-      setRepoLinkValid(repolink.trim().length > 2);
-    }
-  };
-
-  const validateCategoryInput = (categories: string) => {
-    if (categoryIsTouched && categoryIsDirty) {
-      setRepoLinkValid(categories.trim().length > 2);
-    }
-  };
-
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const publishedAtDate = new Date(publishedAt);
-
-    const form = e.target as HTMLFormElement | null;
-
-    if (!form) return;
-
-    addProject({
-      title,
-      description,
-      categories,
-      repolink,
-      publishedAt: publishedAtDate,
-    });
-
-    console.log(title, description, categories, repolink, publishedAt);
-
-    setInput((prevInput) => [
-      ...prevInput,
-      {
-        id: crypto.randomUUID(),
-        title,
-        description,
-        categories,
-        repolink,
-        publishedAt: publishedAtDate,
-      },
-    ]);
-
-    setTitle("");
-    setDescription("");
-    setRepoLink("");
-    setCategory("");
-    setPublishedAt("");
-    setTitleIsDirty(false);
-    setTitleIsTouched(false);
-    setTitleValid(false);
-    setDescriptionIsDirty(false);
-    setDescriptionIsTouched(false);
-    setDescriptionValid(false);
-    setRepoLinkIsDirty(false);
-    setRepoLinkIsTouched(false);
-    setRepoLinkValid(false);
-    setCategoryIsDirty(false);
-    setCategoryIsTouched(false);
-    setCategoryValid(false);
-  };
+    publishedAt,
+  } = UseProjectForm({ handler: addProject });
 
   return (
     <>
