@@ -1,4 +1,4 @@
-// /lib/logger.ts
+/*// /lib/logger.ts
 // Importerer pino for logging
 import pino from "pino";
 
@@ -32,3 +32,4 @@ export function makeLogger(config?: ApplicationConfig): Logger {
     enabled: env !== "test",
   });
 }
+*/

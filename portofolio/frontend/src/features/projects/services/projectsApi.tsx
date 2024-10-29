@@ -1,7 +1,9 @@
 import { ofetch } from "ofetch";
-import { baseUrl, endpoints } from "../../../config/urls";
+import { endpoints } from "../../../config/urls";
 import { ProjectProps as Project } from "../../../components/Types";
+//import { validateProject } from "../helpers/validators";
 import { validateProject } from "../../../../../backend/src/features/projects/helpers/index";
+
 /*
 const list = async () => {
   try {

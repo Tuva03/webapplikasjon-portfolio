@@ -1,4 +1,4 @@
-// Laster miljøvariabler fra en .env-fil
+/*// Laster miljøvariabler fra en .env-fil
 // Laster miljøvariabler fra en .env-fil
 import "dotenv/config";
 
@@ -33,3 +33,4 @@ export const env = createEnv({
   // Hopp over validering hvis SKIP_ENV_VALIDATION er satt i .env
   skipValidation: !!process.env.SKIP_ENV_VALIDATION,
 });
+*/

@@ -13,6 +13,7 @@ export const env = createEnv({
     FRONTEND_URL: z.coerce.string(),
     PORT: z.coerce.number().default(3999),
     DATABASE_URL: z.string().endsWith(".db"),
+    LOG_LEVEL: z.enum(["debug", "info", "warn", "error"]).default("info"),
   },
   runtimeEnv: process.env,
   emptyStringAsUndefined: true,
