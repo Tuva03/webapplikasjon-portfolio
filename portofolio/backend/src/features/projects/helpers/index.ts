@@ -12,6 +12,7 @@ export const projectsSchema = z.object({
   tags: z.array(z.string()),
 });
 
+/*
 export const projectResponseSchema = projectsSchema.extend({
   id: z.string().uuid(),
   title: z.string(),
@@ -23,6 +24,7 @@ export const projectResponseSchema = projectsSchema.extend({
   status: z.boolean(),
   tags: z.array(z.string()),
 });
+*/
 
 export const updateProjectSchema = projectsSchema.omit({
   publishedAt: true,
@@ -30,7 +32,6 @@ export const updateProjectSchema = projectsSchema.omit({
 
 export const createProjectSchema = projectsSchema.omit({
   id: true,
-  publishedAt: true,
 });
 
 export type Project = z.infer<typeof projectsSchema>;
@@ -50,7 +51,7 @@ export const projectFromDbSchema = z.object({
 export type ProjectFromDb = z.infer<typeof projectFromDbSchema>;
 export type CreateProject = z.infer<typeof createProjectSchema>;
 export type UpdateProject = z.infer<typeof updateProjectSchema>;
-export type ProjectResponse = z.infer<typeof projectResponseSchema>;
+//export type ProjectResponse = z.infer<typeof projectResponseSchema>;
 
 export const validateCreateProject = (data: unknown) => {
   return createProjectSchema.safeParse(data);

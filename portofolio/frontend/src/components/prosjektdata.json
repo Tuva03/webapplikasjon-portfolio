@@ -1,7 +1,7 @@
 {
   "projects": [
     {
-      "id": "1",
+      "id": "123e4567-e89b-12d3-a456-426614174000",
       "title": "Prosjekt eksempel 1",
       "description": "Her kommer det kul beskrivelse",
       "repolink": "Her kommer linken til repoet",
@@ -12,7 +12,7 @@
       "tags": ["Ikke et studentprosjekt", "veldig avansert"]
     },
     {
-      "id": "2",
+      "id": "123e4567-e89b-12d3-a456-537725285111",
       "title": "Prosjekt eksempel 2",
       "description": "Her kommer det kul beskrivelse",
       "repolink": "Her kommer linken til repoet",
@@ -23,7 +23,7 @@
       "tags": ["Et studentprosjekt", "Ikke særlig avansert"]
     },
     {
-      "id": "3",
+      "id": "123e4567-e89b-12d3-a456-648836396222",
       "title": "Prosjekt eksempel 3",
       "description": "Her kommer det kul beskrivelse",
       "repolink": "Her kommer linken til repoet",

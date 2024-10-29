@@ -1,9 +1,7 @@
 import { ofetch } from "ofetch";
 import { endpoints } from "../../../config/urls";
 import { ProjectProps as Project } from "../../../components/Types";
-//import { validateProject } from "../helpers/validators";
 import { validateProject } from "../../../../../backend/src/features/projects/helpers/index";
-
 /*
 const list = async () => {
   try {
@@ -31,7 +29,7 @@ const list = async (): Promise<{
     const projects = validateProject(projectData);
 
     if (!projects.success) {
-      console.log("Validation failed:", projects); // Log validation result if it fails
+      console.log("Validation failed:", projects.error?.issues); // Log specific issues
       return { data: [] };
     }
 

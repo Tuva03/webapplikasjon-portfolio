@@ -1,4 +1,4 @@
-import { z } from "zod";
+/*import { z } from "zod";
 
 export { projectSchema, projectsSchema };
 
@@ -19,3 +19,4 @@ const projectsSchema = z.array(projectSchema);
 export function validateProject(data: unknown) {
   return projectSchema.safeParse(data);
 }
+*/

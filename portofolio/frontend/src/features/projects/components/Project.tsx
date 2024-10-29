@@ -54,7 +54,7 @@ type ProjectsProps = {
     publishedAt: Date;
     isPublic: boolean;
     status: boolean;
-    tags: string;
+    tags: string | string[];
   }) => void;
 };
 

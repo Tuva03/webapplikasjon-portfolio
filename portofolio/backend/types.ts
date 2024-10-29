@@ -1,4 +1,4 @@
-import { z } from "zod";
+/*import { z } from "zod";
 
 export const ProjectSchema = z.object({
   id: z.string().uuid(),
@@ -19,3 +19,4 @@ export const ProjectArraySchema = z.array(ProjectSchema);
 export type Project = z.infer<typeof ProjectSchema>;
 
 export type CreateProject = z.infer<typeof ProjectCreateSchema>;
+*/

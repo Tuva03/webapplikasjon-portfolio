@@ -2,8 +2,8 @@ import { serve } from "@hono/node-server";
 import { Hono } from "hono";
 import { cors } from "hono/cors";
 import { serveStatic } from "@hono/node-server/serve-static";
-import { Project, ProjectSchema } from "../types";
 import fs from "node:fs/promises";
+import { Project } from "./features/projects/types";
 
 const app = new Hono();
 
@@ -34,14 +34,12 @@ let projects: Project[] = [
 
 // Henter alle prosjekter fra serveren
 app.get("/projects", async (c) => {
-  const data = await fs.readFile(
-    "../frontend/src/components/prosjektdata.json",
-    "utf8"
-  );
+  const data = await fs.readFile("./src/db/data.json", "utf8");
   const dataAsJson = JSON.parse(data);
   return c.json(dataAsJson);
 });
 
+/*
 app.post("/add", async (c) => {
   const newProject = await c.req.json();
   console.log(newProject);
@@ -54,7 +52,22 @@ app.post("/add", async (c) => {
 
   return c.json<Project[]>(projects, { status: 201 });
 });
+*/
+app.post("/add", async (c) => {
+  const newProject = await c.req.json();
+  const result = ProjectSchema.safeParse(newProject);
 
+  if (!result.success) {
+    return c.json(
+      { error: "Invalid project data", details: result.error.errors },
+      { status: 400 }
+    );
+  }
+
+  const project = result.data;
+  projects.push(project);
+  return c.json<Project[]>(projects, { status: 201 });
+});
 app.get("/", (c) => {
   return c.json<Project[]>(projects);
 });

@@ -1,10 +1,10 @@
 // ... imports av typer, fs og join
 
-import { Project } from "types";
 import { DB } from "./db";
 import { join } from "path";
 import fs from "node:fs/promises";
 import { fileURLToPath } from "url";
+import { Project } from "src/features/projects/helpers";
 
 const __dirname = fileURLToPath(new URL(".", import.meta.url));
 

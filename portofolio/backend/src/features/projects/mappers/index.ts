@@ -89,8 +89,7 @@ export const toDb = (data: Project) => {
   return DbProject;
 };
 */
-import { Project } from "types";
-import { ProjectFromDb, ProjectResponse } from "../helpers";
+import { Project, ProjectFromDb, ProjectResponse } from "../helpers";
 
 const createId = () => {
   return crypto.randomUUID();

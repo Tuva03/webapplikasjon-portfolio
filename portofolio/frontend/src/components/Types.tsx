@@ -6,12 +6,12 @@ export type AddProjectFormProps = {
   addProject: (project: {
     title: string;
     description: string;
-    categories: string | string[];
+    categories: string[];
     repolink: string;
     publishedAt: Date;
     isPublic: boolean;
     status: boolean;
-    tags: string | string[];
+    tags: string[];
   }) => void;
 };
 
@@ -31,12 +31,12 @@ export type ProjectProps = {
   id: string;
   title: string;
   description: string;
-  categories: string | string[];
+  categories: string[];
   repolink: string;
   publishedAt: Date;
   isPublic: boolean;
   status: boolean;
-  tags: string | string[];
+  tags: string[];
 };
 
 export const actions = {

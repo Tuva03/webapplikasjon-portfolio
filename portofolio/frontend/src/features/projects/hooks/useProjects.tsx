@@ -3,8 +3,8 @@ import { useEffect, useState } from "react";
 import { ProjectProps } from "../../../components/Types";
 import { ofetch } from "ofetch";
 import { baseUrl, endpoints } from "../../../config/urls";
-import { projectsSchema } from "../helpers/validators";
 import projectsApi from "../services/projectsApi";
+import { projectsSchema } from "../../../../../backend/src/features/projects/helpers";
 
 export default function useProjects(props: ProjectProps[] = []) {
   const [projects, setProjects] = useState<ProjectProps[]>(props);
@@ -12,12 +12,12 @@ export default function useProjects(props: ProjectProps[] = []) {
   const addProject = (project: {
     title: string;
     description: string;
-    categories: string | string[];
+    categories: string[];
     repolink: string;
     publishedAt: Date;
     isPublic: boolean;
     status: boolean;
-    tags: string | string[];
+    tags: string[];
   }) => {
     setProjects((prev) => [
       ...prev,
@@ -32,7 +32,7 @@ export default function useProjects(props: ProjectProps[] = []) {
         publishedAt: project.publishedAt,
         isPublic: project.isPublic,
         status: project.status,
-        tags: project.tags,
+        tags: Array.isArray(project.tags) ? project.tags : [project.tags],
       },
     ]);
   };
@@ -46,7 +46,8 @@ export default function useProjects(props: ProjectProps[] = []) {
     try {
       //const fetchedProjects = await ofetch(endpoints.projects);
       const fetchedProjects = await projectsApi.list();
-      console.log(projectsSchema.safeParse(projects)); // Se feilene
+      //console.log(projectsSchema.safeParse(projects)); // Se feilene
+      projectsSchema.safeParse(fetchedProjects.data);
       console.log("Data fetched");
       //return projectsSchema.parse(projects.data);
       //setProjects(fetchedProjects.prosjekter);
