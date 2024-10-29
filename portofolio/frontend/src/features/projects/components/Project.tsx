@@ -6,14 +6,25 @@ import { formatDistance } from "../helpers/format";
 import ProjectForm from "./ProjectForm";
 
 function Project(props: Readonly<PropsWithChildren<ProjectProps>>) {
-  const { children, title, description, categories, repolink, publishedAt } =
-    props;
+  const {
+    children,
+    title,
+    description,
+    categories,
+    repolink,
+    publishedAt,
+    isPublic,
+    status,
+    tags,
+  } = props;
 
   const formattedDate = new Date(publishedAt);
 
   const categoriesList = Array.isArray(categories)
     ? categories.join(", ")
     : categories;
+
+  const tagsList = Array.isArray(tags) ? tags.join(", ") : tags;
 
   return (
     <>
@@ -25,6 +36,9 @@ function Project(props: Readonly<PropsWithChildren<ProjectProps>>) {
         Link: <a href={repolink}>{repolink}</a>
       </p>
       <p>Publisert {formatDistance(formattedDate, new Date())}</p>
+      <p>Offentlig eller privat: {isPublic ? "Offentlig" : "Privat"}</p>
+      <p>Publisert eller arkivert: {status ? "Publisert" : "Arkivert"}</p>
+      <p>Tagger: {tagsList}</p>
     </>
   );
 }
@@ -38,6 +52,9 @@ type ProjectsProps = {
     categories: string | string[];
     repolink: string;
     publishedAt: Date;
+    isPublic: boolean;
+    status: boolean;
+    tags: string;
   }) => void;
 };
 
@@ -67,6 +84,9 @@ export default function Projects(props: Readonly<ProjectsProps>) {
                 categories={project.categories}
                 repolink={project.repolink}
                 publishedAt={project.publishedAt}
+                isPublic={project.isPublic}
+                status={project.status}
+                tags={project.tags}
               />
               <button
                 id="fjern_prosjekt"

@@ -1,228 +1,116 @@
-import { F } from "ofetch/dist/shared/ofetch.d0b3d489";
-import { FormEvent, useState } from "react";
+import { useState, type FormEvent } from "react";
 
-type UseProjectForm = {
-  handler: (title: string) => void;
+type FieldState = {
+  value: string | Date | boolean;
+  isValid: boolean;
+  isDirty: boolean;
+  isTouched: boolean;
 };
 
-export function UseProjectForm(props: UseProjectForm) {
-  const { handler } = props;
+type UseFormProps<T> = {
+  initialFields: T;
+  onSubmit: (data: T) => void;
+  validate: (field: keyof T, value: string | Date | boolean) => boolean;
+};
 
-  const [titleValid, setTitleValid] = useState(false);
-  const [titleIsDirty, setTitleIsDirty] = useState(false);
-  const [titleIsTouched, setTitleIsTouched] = useState(false);
-  const [title, setTitle] = useState("");
+export function useHabitForm<
+  T extends Record<string, string | Date | boolean>
+>({ initialFields, onSubmit, validate }: UseFormProps<T>) {
+  const [fields, setFields] = useState<Record<keyof T, FieldState>>(
+    Object.fromEntries(
+      Object.keys(initialFields).map((key) => [
+        key as keyof T,
+        {
+          value: initialFields[key as keyof T],
+          isValid: false,
+          isDirty: false,
+          isTouched: false,
+        } as FieldState,
+      ])
+    ) as Record<keyof T, FieldState>
+  );
 
-  const isInvalidTitle = !titleValid && titleIsDirty;
-
-  const [descriptionValid, setDescriptionValid] = useState(false);
-  const [descriptionIsDirty, setDescriptionIsDirty] = useState(false);
-  const [descriptionIsTouched, setDescriptionIsTouched] = useState(false);
-  const [description, setDescription] = useState("");
-
-  const isInvalidDescription = !descriptionValid && descriptionIsDirty;
-
-  const [repolinkValid, setRepoLinkValid] = useState(false);
-  const [repolinkIsDirty, setRepoLinkIsDirty] = useState(false);
-  const [repolinkIsTouched, setRepoLinkIsTouched] = useState(false);
-  const [repolink, setRepoLink] = useState("");
-
-  const isInvalidRepolink = !repolinkValid && repolinkIsDirty;
-
-  const [categoryValid, setCategoryValid] = useState(false);
-  const [categoryIsDirty, setCategoryIsDirty] = useState(false);
-  const [categoryIsTouched, setCategoryIsTouched] = useState(false);
-  const [categories, setCategory] = useState("");
-
-  const isInvalidCategory = !categoryValid && categoryIsDirty;
-
-  const [tagValid, setTagValid] = useState(false);
-  const [tagIsDirty, setTafIsDirty] = useState(false);
-  const [tagIsTouched, setTagIsTouched] = useState(false);
-  const [tag, setTag] = useState("");
-
-  const isInvalidTag = !tagValid && tagIsDirty;
-
-  const [publishedAt, setPublishedAt] = useState("");
-
-  /*
-  const [input, setInput] = useState<
-    {
-      id: string;
-      title: string;
-      description: string;
-      categories: string;
-      repolink: string;
-      publishedAt: Date;
-    }[]
-  >([]);
-*/
-
-  const updateFormTitle = (event: FormEvent<HTMLInputElement>) => {
-    const input = event.target as HTMLInputElement | null;
-    if (!input) return;
-    setTitleIsDirty(true);
-    setTitle(input.value);
-  };
-
-  const updateFormDescription = (event: FormEvent<HTMLInputElement>) => {
-    const input = event.target as HTMLInputElement | null;
-    if (!input) return;
-    setDescriptionIsDirty(true);
-    setDescription(input.value);
-  };
-
-  const updateFormRepoLink = (event: FormEvent<HTMLInputElement>) => {
-    const input = event.target as HTMLInputElement | null;
-    if (!input) return;
-    setRepoLinkIsDirty(true);
-    setRepoLink(input.value);
-  };
-
-  const updateFormCategory = (event: FormEvent<HTMLInputElement>) => {
-    const input = event.target as HTMLInputElement | null;
-    if (!input) return;
-    setCategoryIsDirty(true);
-    setCategory(input.value);
-  };
-
-  const validateTitleInput = (title: string) => {
-    if (titleIsTouched && titleIsDirty) {
-      setTitleValid(title.trim().length > 2);
-    }
-  };
-
-  const validateDescriptionInput = (description: string) => {
-    if (descriptionIsTouched && descriptionIsDirty) {
-      setDescriptionValid(description.trim().length > 2);
-    }
-  };
-
-  const validateRepoLinkInput = (repolink: string) => {
-    if (repolinkIsTouched && repolinkIsDirty) {
-      setRepoLinkValid(repolink.trim().length > 2);
-    }
-  };
-
-  const validateCategoryInput = (categories: string) => {
-    if (categoryIsTouched && categoryIsDirty) {
-      setRepoLinkValid(categories.trim().length > 2);
-    }
-  };
-  /*
-  const handleSubmit = (e: React.FormEvent) => {
-    e.preventDefault();
-
-    const publishedAtDate = new Date(publishedAt);
-
-    const form = e.target as HTMLFormElement | null;
-
-    if (!form) return;
-
-    addProject({
-      title,
-      description,
-      categories,
-      repolink,
-      publishedAt: publishedAtDate,
-    });
-
-    console.log(title, description, categories, repolink, publishedAt);
-
-    setInput((prevInput) => [
-      ...prevInput,
-      {
-        id: crypto.randomUUID(),
-        title,
-        description,
-        categories,
-        repolink,
-        publishedAt: publishedAtDate,
+  const updateField = (field: keyof T, value: string | Date | boolean) => {
+    setFields((prev) => ({
+      ...prev,
+      [field]: {
+        ...prev[field],
+        value,
+        isDirty: true,
+        isValid: validate[field] ? validate[field](field, value) : true,
       },
-    ]);
-
-    setDescription("");
-    setRepoLink("");
-    setCategory("");
-    setPublishedAt("");
-    setTitleIsDirty(false);
-    setTitleIsTouched(false);
-    setTitleValid(false);
-    setDescriptionIsDirty(false);
-    setDescriptionIsTouched(false);
-    setDescriptionValid(false);
-    setRepoLinkIsDirty(false);
-    setRepoLinkIsTouched(false);
-    setRepoLinkValid(false);
-    setCategoryIsDirty(false);
-    setCategoryIsTouched(false);
-    setCategoryValid(false);
+    }));
   };
-  */
-  const reset = () => {
-    setTitle("");
-    setTitleIsDirty(false);
-    setTitleIsTouched(false);
-    setTitleValid(false);
 
-    setDescription("");
-    setDescriptionIsDirty(false);
-    setDescriptionIsTouched(false);
-    setDescriptionValid(false);
-
-    setCategory("");
-    setCategoryIsDirty(false);
-    setCategoryIsTouched(false);
-    setCategoryValid(false);
-
-    setRepoLink("");
-    setRepoLinkIsDirty(false);
-    setRepoLinkIsTouched(false);
-    setRepoLinkValid(false);
-
-    setPublishedAt("");
+  const setFieldTouched = (field: keyof T) => {
+    setFields((prev) => ({
+      ...prev,
+      [field]: { ...prev[field], isTouched: true },
+    }));
   };
 
   const handleSubmit = (event: FormEvent<HTMLFormElement>) => {
     event.preventDefault();
-    if (!titleValid || !descriptionValid) return;
-    handler(title);
-    handler(description);
-    handler(categories);
-    handler(repolink);
-    handler(publishedAt);
-    reset();
+    const isFormValid = Object.values(fields).every((field) => field.isValid);
+
+    if (!isFormValid) {
+      console.log("Form not valid:", fields); // Debugging: Log invalid fields
+      return;
+    }
+
+    const formData = Object.fromEntries(
+      Object.keys(fields).map((key) => [key, fields[key as keyof T].value])
+    ) as T;
+
+    onSubmit(formData);
+    resetForm();
   };
 
+  const resetForm = () => {
+    setFields(
+      Object.fromEntries(
+        Object.keys(initialFields).map((key) => [
+          key,
+          {
+            value:
+              typeof initialFields[key as keyof T] === "boolean" ? false : "",
+            isValid: false,
+            isDirty: false,
+            isTouched: false,
+          },
+        ])
+      ) as Record<keyof T, FieldState>
+    );
+  };
+
+  const getFieldProps = (field: keyof T) => {
+    const fieldValue = fields[field].value;
+    return {
+      value: typeof fieldValue === "boolean" ? fieldValue : String(fieldValue),
+      //      checked: typeof fieldValue === "boolean" ? fieldValue : undefined,
+      onChange: (event: FormEvent<HTMLInputElement>) => {
+        const input = event.target as HTMLInputElement;
+        const value = input.type === "checkbox" ? input.checked : input.value;
+        updateField(field, value);
+      },
+      onBlur: () => setFieldTouched(field),
+    };
+  };
+
+  // const isFieldInvalid = (field: keyof T) =>
+  //   !fields[field].isValid && fields[field].isDirty;
+
+  const isFieldInvalid = (field: keyof T) =>
+    !(field === "isPublic" || field === "status")
+      ? !fields[field].isValid && fields[field].isDirty
+      : false;
+
   return {
+    fields,
     handleSubmit,
-
-    title,
-    isInvalidTitle,
-    updateFormTitle,
-    setTitleIsTouched,
-    validateTitleInput,
-
-    description,
-    isInvalidDescription,
-    updateFormDescription,
-    setDescriptionIsTouched,
-    validateDescriptionInput,
-
-    categories,
-    isInvalidCategory,
-    updateFormCategory,
-    setCategoryIsTouched,
-    validateCategoryInput,
-
-    repolink,
-    isInvalidRepolink,
-    updateFormRepoLink,
-    setRepoLinkIsTouched,
-    validateRepoLinkInput,
-
-    publishedAt,
+    getFieldProps,
+    isFieldInvalid,
   };
 }
 
-export default UseProjectForm;
+export default useHabitForm;

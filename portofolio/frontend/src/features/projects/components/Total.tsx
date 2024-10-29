@@ -2,7 +2,7 @@ import * as prosjekter from "../../../components/prosjektdata.json";
 
 export default function Total({ total }: { total: number }) {
   const categoryCounts = {};
-  const projects = prosjekter.prosjekter;
+  const projects = prosjekter.projects;
 
   projects.forEach((project) => {
     const { categories } = project;

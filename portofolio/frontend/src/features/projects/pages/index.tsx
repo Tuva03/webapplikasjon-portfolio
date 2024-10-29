@@ -1,7 +1,6 @@
 import { Action, ProjectProps as Project } from "../../../components/Types";
 import useProjects from "../hooks/useProjects";
 import Projects from "../components/Project";
-import { useEffect } from "react";
 
 export default function ProjectPage() {
   //useEffect(() => {
@@ -38,6 +37,9 @@ export default function ProjectPage() {
           categories: project.categories,
           repolink: project.repolink,
           publishedAt: publishedAtDate,
+          isPublic: project.isPublic,
+          status: project.status,
+          tags: project.tags,
         });
 
         break;

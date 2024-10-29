@@ -9,6 +9,9 @@ export type AddProjectFormProps = {
     categories: string | string[];
     repolink: string;
     publishedAt: Date;
+    isPublic: boolean;
+    status: boolean;
+    tags: string | string[];
   }) => void;
 };
 
@@ -31,6 +34,9 @@ export type ProjectProps = {
   categories: string | string[];
   repolink: string;
   publishedAt: Date;
+  isPublic: boolean;
+  status: boolean;
+  tags: string | string[];
 };
 
 export const actions = {

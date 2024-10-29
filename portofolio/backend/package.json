@@ -3,18 +3,25 @@
   "scripts": {
     "dev:frontend": "vite",
     "dev:server": "tsx --watch src/server.ts",
-    "dev": "concurrently -n frontend,server -c green,blue \"pnpm run dev:frontend\" \"pnpm run dev:server\""
+    "dev": "concurrently -n frontend,server -c green,blue \"pnpm run dev:frontend\" \"pnpm run dev:server\"",
+    "dev:debug": "tsx watch --inspect src/server.ts",
+    "db:setup": "tsx src/db/index.ts"
   },
   "dependencies": {
     "@hono/node-server": "^1.13.1",
+    "@t3-oss/env-core": "^0.11.1",
+    "@types/better-sqlite3": "^7.6.11",
+    "better-sqlite3": "^11.5.0",
+    "dotenv": "^16.4.5",
     "hono": "^4.6.2",
+    "pino": "^9.5.0",
     "zod": "^3.23.8"
   },
   "devDependencies": {
     "@types/node": "^22.5.0",
     "concurrently": "8.2.2",
     "tsx": "^4.17.0",
-    "typescript": "^5.5.4",
+    "typescript": "^5.6.2",
     "vite": "^5.4.2"
   }
 }

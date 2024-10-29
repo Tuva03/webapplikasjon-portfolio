@@ -23,8 +23,8 @@ export default function App(props: AppProps) {
     ],
   };
 
-  const prosjektlise = prosjekter.prosjekter;
-  const [projects, setProjects] = useState<ProjectProps[]>(prosjektlise);
+  //const prosjektlise = prosjekter.projects;
+  //const [projects, setProjects] = useState<ProjectProps[]>(prosjektlise);
 
   return (
     <>

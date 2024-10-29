@@ -7,7 +7,13 @@ import fs from "node:fs/promises";
 
 const app = new Hono();
 
-app.use("/*", cors());
+app.use(
+  "/*",
+  cors({
+    origin: "http://localhost:5174", // Specify the frontend origin
+    credentials: true, // Allow credentials to be included in requests
+  })
+);
 
 app.use("/portofolio/*", serveStatic({ root: "./" }));
 
@@ -20,6 +26,9 @@ let projects: Project[] = [
     categories: ["En kategorie", "Enda en kategori"],
     repolink: "Her kommer linken til repoet",
     publishedAt: "Her kommer dato prosjektet ble opprettet",
+    isPublic: true,
+    status: true,
+    tags: ["Tag eksempel 1", "tag eksempel 2"],
   },
 ];
 
