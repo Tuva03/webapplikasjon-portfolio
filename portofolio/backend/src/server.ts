@@ -4,6 +4,7 @@ import { cors } from "hono/cors";
 import { serveStatic } from "@hono/node-server/serve-static";
 import fs from "node:fs/promises";
 import { Project } from "./features/projects/types";
+import { projectsSchema } from "./features/projects/helpers";
 
 const app = new Hono();
 
@@ -25,7 +26,7 @@ let projects: Project[] = [
     description: "Her kommer det kul beskrivelse",
     categories: ["En kategorie", "Enda en kategori"],
     repolink: "Her kommer linken til repoet",
-    publishedAt: "Her kommer dato prosjektet ble opprettet",
+    publishedAt: new Date("2023-10-05T15:30:00Z"),
     isPublic: true,
     status: true,
     tags: ["Tag eksempel 1", "tag eksempel 2"],
@@ -39,12 +40,11 @@ app.get("/projects", async (c) => {
   return c.json(dataAsJson);
 });
 
-/*
 app.post("/add", async (c) => {
   const newProject = await c.req.json();
   console.log(newProject);
 
-  const project = ProjectSchema.parse(newProject);
+  const project = projectsSchema.parse(newProject);
 
   if (!project) return c.json({ error: "Invalid project" }, { status: 400 });
   console.log(project);
@@ -52,10 +52,11 @@ app.post("/add", async (c) => {
 
   return c.json<Project[]>(projects, { status: 201 });
 });
-*/
+
+/*
 app.post("/add", async (c) => {
   const newProject = await c.req.json();
-  const result = ProjectSchema.safeParse(newProject);
+  const result = projectsSchema.safeParse(newProject);
 
   if (!result.success) {
     return c.json(
@@ -68,6 +69,8 @@ app.post("/add", async (c) => {
   projects.push(project);
   return c.json<Project[]>(projects, { status: 201 });
 });
+*/
+
 app.get("/", (c) => {
   return c.json<Project[]>(projects);
 });

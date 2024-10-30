@@ -18,13 +18,6 @@ export const seed = async (db: DB) => {
         VALUES (?, ?, ?, ?, ?, ?, ?, ?, ?)
     `);
 
-  // ... (lignende prepare-statements for habits og streaks)
-
-  //db.transaction(() => {
-  //  for (const user of users) {
-  //    insertUser.run(user.id, user.email, user.name);
-  //  }
-  // ... (lignende løkker for habits og streaks)
   db.transaction(() => {
     for (const project of projects) {
       insertProject.run(

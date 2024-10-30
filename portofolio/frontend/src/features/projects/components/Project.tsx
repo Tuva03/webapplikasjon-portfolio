@@ -59,7 +59,7 @@ type ProjectsProps = {
 };
 
 export default function Projects(props: Readonly<ProjectsProps>) {
-  const { projects = [], handleProjectMutation, addProject, children } = props;
+  const { projects = [], handleProjectMutation, addProject } = props;
 
   //const addProject = async (title: string) => {
   //   handleProjectMutation("add", { title });

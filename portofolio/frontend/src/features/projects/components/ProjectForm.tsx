@@ -150,3 +150,4 @@ export default function ProjectForm(props: Readonly<ProjectFormProps>) {
     </>
   );
 }
+// bug i skjema når man legger til nye prosjekter angående status og isPublic, de vil kun bli lagt til hvis de er blitt registrert som isTouched og isDirty. Fikk ikke tid til å fikse det.

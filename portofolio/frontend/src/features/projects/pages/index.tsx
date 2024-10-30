@@ -20,7 +20,7 @@ export default function ProjectPage() {
 
         if (!project.publishedAt) {
           console.error("publishedAt is undefined");
-          return; // Handle the case where publishedAt is not provided
+          return;
         }
 
         const publishedAtDate = new Date(project.publishedAt);
@@ -28,7 +28,7 @@ export default function ProjectPage() {
 
         if (isNaN(publishedAtDate.getTime())) {
           console.error("Invalid publishedAt date:", project.publishedAt);
-          return; // Handle invalid date
+          return;
         }
 
         addProject({
@@ -51,8 +51,6 @@ export default function ProjectPage() {
         break;
     }
   };
-
-  //if (!projects || projects.length === 0) return <p>Laster ...</p>;
 
   return (
     <Projects

@@ -1,8 +1,6 @@
 // useProjects.ts
 import { useEffect, useState } from "react";
 import { ProjectProps } from "../../../components/Types";
-import { ofetch } from "ofetch";
-import { baseUrl, endpoints } from "../../../config/urls";
 import projectsApi from "../services/projectsApi";
 import { projectsSchema } from "../../../../../backend/src/features/projects/helpers";
 
@@ -46,18 +44,15 @@ export default function useProjects(props: ProjectProps[] = []) {
     try {
       //const fetchedProjects = await ofetch(endpoints.projects);
       const fetchedProjects = await projectsApi.list();
-      //console.log(projectsSchema.safeParse(projects)); // Se feilene
-      projectsSchema.safeParse(fetchedProjects.data);
+      console.log(projectsSchema.safeParse(projects)); // Se feilene
       console.log("Data fetched");
       //return projectsSchema.parse(projects.data);
-      //setProjects(fetchedProjects.prosjekter);
-      setProjects(fetchedProjects?.data ?? []);
+      setProjects(fetchedProjects.data);
       console.log("Data initialized");
     } catch (error) {
-      console.error("Error fetching projects:", error);
+      initializeData();
     }
   };
-
   useEffect(() => {
     initializeData();
   }, []);

@@ -54,7 +54,7 @@ export function useHabitForm<
     const isFormValid = Object.values(fields).every((field) => field.isValid);
 
     if (!isFormValid) {
-      console.log("Form not valid:", fields); // Debugging: Log invalid fields
+      console.log("Form not valid:", fields);
       return;
     }
 
@@ -87,7 +87,7 @@ export function useHabitForm<
     const fieldValue = fields[field].value;
     return {
       value: typeof fieldValue === "boolean" ? fieldValue : String(fieldValue),
-      //      checked: typeof fieldValue === "boolean" ? fieldValue : undefined,
+      //checked: typeof fieldValue === "boolean" ? fieldValue : undefined,
       onChange: (event: FormEvent<HTMLInputElement>) => {
         const input = event.target as HTMLInputElement;
         const value = input.type === "checkbox" ? input.checked : input.value;
@@ -97,13 +97,8 @@ export function useHabitForm<
     };
   };
 
-  // const isFieldInvalid = (field: keyof T) =>
-  //   !fields[field].isValid && fields[field].isDirty;
-
   const isFieldInvalid = (field: keyof T) =>
-    !(field === "isPublic" || field === "status")
-      ? !fields[field].isValid && fields[field].isDirty
-      : false;
+    !fields[field].isValid && fields[field].isDirty;
 
   return {
     fields,
@@ -114,3 +109,5 @@ export function useHabitForm<
 }
 
 export default useHabitForm;
+
+// bug i skjema når man legger til nye prosjekter angående status og isPublic, de vil kun bli lagt til hvis de er blitt registrert som isTouched og isDirty. Fikk ikke tid til å fikse det.
